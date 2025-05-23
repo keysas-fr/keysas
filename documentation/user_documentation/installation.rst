@@ -145,6 +145,15 @@ To install the Full USB version of **Keysas** (decontamination station):
  $ sudo make install
  $ sudo make install-yararules
 
+.. admonition:: False positive detection by Yara rules
+  :class: note
+
+  Some Yara rules (for example the **Big_numbers*** series) may give repeated false
+  positives on some document types. If you want to remove them, you'll have to
+  locate them in **/usr/share/keysas/rules**, commenting them out and running
+  the **index_gen.sh** script.
+
+
 At the end of the installation, you should see something like this:
 
 .. image:: /img/install_completed.png 
