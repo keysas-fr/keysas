@@ -182,6 +182,52 @@ If you want to check the full installation (USB mode):
 
  $ systemctl status keysas keysas-in keysas-transit keysas-out keysas-io keysas-backend
 
+Cross compiling for RPi4
+------------------------
+
+If you don't have a RPi4 with all the needed dependencies at hand, you may
+try to cross compile via docker and qemu via `multiarch/qemu-user-static
+<https://github.com/multiarch/qemu-user-static>`_.
+
+Create the following ``Dockerfile``:
+
+.. code-block:: Dockerfile
+
+   FROM rust:latest 
+   RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
+       libatk1.0-dev:arm64 libglib2.0-dev:arm64 libcairo-5c-dev:arm64 \
+       libpango1.0-dev:arm64  libgtk-3-dev:arm64 libsoup-3.0-dev:arm64 \
+       libjavascriptcoregtk-4.1-dev:arm64 libudev-dev:arm64 \
+       libwebkit2gtk-4.1-dev:arm64
+   RUN apt-get install --assume-yes --no-install-recommends \
+       libclang-dev:arm64 cmake:arm64 libyara-dev:arm64 libseccomp-dev:arm64
+   RUN rustup toolchain install --force-non-host nightly-aarch64-unknown-linux-gnu
+   WORKDIR /app 
+   CMD ["cargo",  "+nightly","build", "--target", "aarch64-unknown-linux-gnu", \
+        "--workspace", "--exclude", "keysas-admin", "--release" ]
+
+Allow docker to build via qemu:
+
+.. code-block:: shell-session
+   
+   $ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+Build and run the docker image:
+
+.. code-block:: shell-session
+
+   $ docker build --platform=linux/arm64/v8 . -t keysas-build/aarch64 
+   $ docker run --platform=linux/arm64/v8 --rm -it -v "$PWD:/app" keysas-build/aarch64 
+
+The resulting files will be in the ``target/release`` directory.
+
+Until the rust image is migrated to debian 13,  you will see some errors when
+compiling the ``yara`` crate, You need to downgrade it to ``0.29.0`` (see
+`related issue
+comment <https://github.com/keysas-fr/keysas/issues/80#issuecomment-2889949214>`_).
+
+
+
 Building **Keysas-frontend**
 -----------------------------
 
