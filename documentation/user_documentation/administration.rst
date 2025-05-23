@@ -238,9 +238,10 @@ This parameter tells if **Keysas** should remove the file if Yara matched at lea
 ALLOWED_TYPES
 ~~~~~~~~~~~~~~~
 
-This parameter creates a whitelist of allowed file types. Types not explicitly listed here simply won't by transfered. For now the following types are supported:
-
-https://github.com/bojand/infer#supported-types
+This parameter creates a whitelist of allowed file types. Types not explicitly
+listed here simply won't by transfered. The type are infered from the content
+of the file (not from their extension). The known types and associated mime
+type are listed here: https://github.com/bojand/infer#supported-types
 
 keysas-out
 --------------
