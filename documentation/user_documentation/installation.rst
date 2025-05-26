@@ -39,7 +39,7 @@ Getting **Keysas**
 
 A pre-compiled **Keysas** binary for ``x86_64`` architecture is at your
 disposal. We recommend using the latest version here:
-https://github.com/r3dlight/keysas/releases
+https://github.com/keysas-fr/keysas/releases
 
 
 Download the following files of lastest stable version.
@@ -69,7 +69,7 @@ file:
 
  .. code-block:: shell-session
 
-  $ git clone --depth=1 https://github.com/r3dlight/keysas.git
+  $ git clone --depth=1 https://github.com/keysas-fr/keysas.git
   $ cd keysas
   $ make build
 
