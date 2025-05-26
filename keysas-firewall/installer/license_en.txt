@@ -1,6 +1,6 @@
 Keysas is an opensource software distributed under the GNU General Public License v3.0.
 
-Code is available on Github : https://github.com/r3dlight/keysas
+Code is available on Github : https://github.com/keysas-fr/keysas
                     
                     
                     GNU GENERAL PUBLIC LICENSE

@@ -16,7 +16,7 @@ The code is entirely written in Rust, sandboxed, and follows the principle of le
 
 Download
 =========
-- `Github/releases <https://github.com/r3dlight/keysas/releases>`_
+- `Github/releases <https://github.com/keysas-fr/keysas/releases>`_
 
 
 Before getting started, you need to sign at least one output USB device (which will receive files considered safe). All unsigned USB storage devices will be considered default input devices (potentially containing malicious files).

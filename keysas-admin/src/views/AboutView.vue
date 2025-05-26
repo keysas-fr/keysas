@@ -21,7 +21,7 @@ export default {
   <div class="container">
     <NavBar />
     <div class="content">
-      <h2>Keysas-admin. Version 2.5</h2>
+      <h2>Keysas-admin. Version 2.6</h2>
       <h2>Please visit <a href="https://keysas.fr" class="website text-info">keysas.fr</a> to learn more </h2>
       <h3>&copy; Keysas 2022-2025.</h3>
     </div>
