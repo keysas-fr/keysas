@@ -5,7 +5,7 @@ Please report security vulnerabilities to one of the contributors. You will rece
 
 # Security audit for v2.5
 
-  - This code has undergone a security audit conducted by [Amossys](https://www.amossys.fr/) an external company specialized in cybersecurity. Since this audit, all security patches have been applied to the current v2.5.
+  - This code has undergone a security audit conducted by [Amossys](https://www.amossys.fr/) an external company specialized in cybersecurity. Since this audit, all security patches have been applied to the current v2.6.
 
 | Component | Technical facts | Patched facts | Unpatched facts |
 |-----------------|-----------------|-----------------|----------|
