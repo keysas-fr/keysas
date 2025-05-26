@@ -24,9 +24,9 @@ copyright = '2020-2025, Stephane N'
 author = 'Stephane N'
 
 # The short X.Y version
-version = '2.5'
+version = '2.6'
 # The full version, including alpha/beta/rc tags
-release = 'v2.5'
+release = 'v2.6'
 
 
 

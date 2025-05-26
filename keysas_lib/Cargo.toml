@@ -1,9 +1,11 @@
+# SPDX-FileCopyrightText: 2025 Stephane Neveu
+# SPDX-FileCopyrightText: 2025 Luc Bonnafoux
+# SPDX-License-Identifier: GPL-3.0-only
+
 [package]
 name = "keysas_lib"
-version = "2.5.0"
+version = "2.6.0"
 edition = "2024"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 sha2 = "0.10"
@@ -23,7 +25,7 @@ time = "0.3"
 base64 = "0.22"
 
 [dependencies.oqs]
-version = "0.10"
+version = "0.11"
 default-features = false
 features = ["ml_dsa"]
 

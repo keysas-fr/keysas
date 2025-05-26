@@ -1,6 +1,10 @@
+# SPDX-FileCopyrightText: 2025 Stephane Neveu
+# SPDX-FileCopyrightText: 2025 Luc Bonnafoux
+# SPDX-License-Identifier: GPL-3.0-only
+
 [package]
 name = "keysas-core"
-version = "2.5.0"
+version = "2.6.0"
 edition = "2024"
 
 [dependencies]

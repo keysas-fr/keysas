@@ -1,6 +1,9 @@
+# SPDX-FileCopyrightText: 2025 Stephane Neveu
+# SPDX-License-Identifier: GPL-3.0-only
+
 [package]
 name = "keysas-fido"
-version = "2.5.0"
+version = "2.6.0"
 edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

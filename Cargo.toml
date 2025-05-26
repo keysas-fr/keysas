@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Stephane Neveu
+# SPDX-FileCopyrightText: 2025 Luc Bonnafoux
+# SPDX-License-Identifier: GPL-3.0-only
+
 [workspace]
 resolver = "2"
 members = [
@@ -7,9 +11,9 @@ members = [
     "keysas-sign/",
     "keysas-fido/",
     "keysas_lib/",
-    "keysas-admin/src-tauri",
 ]
 
 exclude = [
+    "keysas-admin/src-tauri",
     "keysas-firewall"
 ]
