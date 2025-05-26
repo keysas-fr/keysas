@@ -29,8 +29,6 @@ version = '2.6'
 release = 'v2.6'
 
 
-
-
 # -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.

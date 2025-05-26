@@ -28,6 +28,7 @@ Keysas v2.5
 
  * `keysas-v2.5 <https://github.com/keysas-fr/keysas/releases>`_
 
+
 .. admonition:: Release note
  :class: note
 

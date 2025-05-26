@@ -23,6 +23,12 @@ This code has undergone a **security audit** conducted by `Amossys <https://www.
 Since this audit, all security patches have been applied to the current v2.5. 
 See SECURITY.md on the github repository for more information.
 
+
+This code has undergone a **security audit** conducted by `Amossys <https://www.amossys.fr/>`_ an external company specialized in cybersecurity. 
+Since this audit, all security patches have been applied to the current v2.5. 
+See SECURITY.md on the github repository for more information.
+
+
 **Keysas** can be installed on Debian 12 (Bookworm) or Debian 13 (Trixie) systems.
 
 This software is mostly written in `Rust <https://www.rust-lang.org/>`_, under `GPL-3.0 license <https://gitlab.com/r3dlight/keysas/-/blob/master/LICENSE>`_.
