@@ -1,6 +1,6 @@
 Keysas est un logiciel opensource distribué sous la licence GNU General Public License v3.0.
 
-Les sources sont disponibles sur Github : https://github.com/r3dlight/keysas
+Les sources sont disponibles sur Github : https://github.com/keysas-fr/keysas
                     
                     
                     GNU GENERAL PUBLIC LICENSE

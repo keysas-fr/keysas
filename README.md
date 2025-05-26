@@ -57,7 +57,7 @@ sudo apt -qy install -y libyara-dev libyara9 wget cmake make lsb-release softwar
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
 source "$HOME/.cargo/env"
-git clone --depth=1 https://github.com/r3dlight/keysas && cd keysas
+git clone --depth=1 https://github.com/keysas-fr/keysas && cd keysas
 rustup default nightly
 make help
 make build

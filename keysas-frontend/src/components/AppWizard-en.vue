@@ -7,7 +7,7 @@
 <p> My IP is {{ ip[0] }}.</p>
 <p><b>KEYSAS</b> is 100% opesource and written in Rust :-) <br> The provided SD card image for Raspberry Pi 4 is based a hardened GNU/Linux Debian 12 (Bookworm). DHCP is activated by default: your IP should available above in this page.</p>
 <p> If your are using the SD image, we already have configured protections against BadUSB, only USB mass storages will be recognized. USB keyboards and mouse should <b>not</b> work.</p>
-To administrate your <b>Keysas</b> stations, you should install the <b>Keysas-admin</b> application on a dedicated administration laptop (Debian 12). This app is available at github.com/r3dlight/keysas/ then click on <b>Releases</b> section.
+To administrate your <b>Keysas</b> stations, you should install the <b>Keysas-admin</b> application on a dedicated administration laptop (Debian 12). This app is available at github.com/keysas-fr/keysas/ then click on <b>Releases</b> section.
 <div class="callout callout-warning">
 If it's your first time using <b>Keysas-admin</b>, you should start by generating a <b>IKPQPKI</b> (<b>I</b>ncredible <b>K</b>eysas <b>P</b>ost-<b>Q</b>uantum <b>P</b>rivate <b>K</b>ey <b>I</b>nfrastrcture) using <b>Keysas-admin</b>, enroll your new <b>Keysas</b> station and sign at least one output USB device. <br>
 </div>

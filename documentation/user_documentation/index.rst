@@ -31,7 +31,7 @@ See SECURITY.md on the github repository for more information.
 
 **Keysas** can be installed on Debian 12 (Bookworm) or Debian 13 (Trixie) systems.
 
-This software is mostly written in `Rust <https://www.rust-lang.org/>`_, under `GPL-3.0 license <https://gitlab.com/r3dlight/keysas/-/blob/master/LICENSE>`_.
+This software is mostly written in `Rust <https://www.rust-lang.org/>`_, under `GPL-3.0 license <https://gitlab.com/keysas-fr/keysas/-/blob/master/LICENSE>`_.
 
 Learn more and contribute on `Github <https://github.com/keysas-fr/keysas/>`_.
 

@@ -8,7 +8,7 @@
 <p><b>KEYSAS</b> est une solution de station blanche 100% opensource et écrite en Rust :-) <br> L’image fournie pour Raspberry Pi 4 est basée sur une distribution GNU/Linux Debian 12 (Bookworm) durcie. Le DHCP est activé par défaut: l’adresse IP obtenue est normalement affichée plus haut.</p>
 <p>Afin de prémunir la station blanche d’attaques de type BadUSB, seuls les périphériques USB de type “stockage de masse” comme les clés ou disques durs USB sont reconnus par la station blanche. Les claviers USB et les souris ne peuvent donc <b>pas</b> fonctionner.</p>
 Pour pouvoir administrer vos stations blanches <b>Keysas</b>, vous devez d'abord installer l'application <b>Keysas-admin</b> sur un poste d'administration
-GNU/Linux dédié (Debian 12). Cette application est disponible en téléchargement sur github.com/r3dlight/keysas/ dans la rubrique <b>Releases</b> au format .deb.
+GNU/Linux dédié (Debian 12). Cette application est disponible en téléchargement sur github.com/keysas-fr/keysas/ dans la rubrique <b>Releases</b> au format .deb.
 <div class="callout callout-warning">
 Si c'est la première fois que vous utilisez une station blanche <b>Keysas</b>, vous devez commencer par générer une <b>IKPQPKI</b> (<b>I</b>ncredible <b>K</b>eysas <b>P</b>ost-<b>Q</b>uantum <b>P</b>rivate <b>K</b>ey <b>I</b>nfrastrcture) avec <b>Keysas-admin</b>, enroller la nouvelle station blanche et signer un(des) périphérique(s) USB de sortie. <br>
 </div>
