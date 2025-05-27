@@ -27,9 +27,9 @@ jobs:
           mv keysas-core/keysas-core.cdx.xml sbom/keysas-core.cdx.xml
           mv keysas-backend/keysas-backend.cdx.xml sbom/keysas-backend.cdx.xml
           mv keysas-io/keysas-io.cdx.xml sbom/keysas-io.cdx.xml
-          mv keysas-frontend/keysas-fido.cdx.xml sbom/keysas-fido.cdx.xml
-          mv keysas-frontend/keysas-sign.cdx.xml sbom/keysas-sign.cdx.xml
-          mv keysas-frontend/keysas_lib.cdx.xml sbom/keysas_lib.cdx.xml
+          mv keysas-fido/keysas-fido.cdx.xml sbom/keysas-fido.cdx.xml
+          mv keysas-sign/keysas-sign.cdx.xml sbom/keysas-sign.cdx.xml
+          mv keysas_lib/keysas_lib.cdx.xml sbom/keysas_lib.cdx.xml
           
       - name: Add XSLT to SBOM XML
         run: |
