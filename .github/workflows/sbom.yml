@@ -41,9 +41,6 @@ jobs:
             sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' "$file"
           done
 
-      - name: Copy XSLT to sbom folder
-        run: cp .github/assets/cyclonedx-to-html.xsl sbom/
-
       - name: Generate index.html for SBOM
         run: |
           echo "<h1>Keysas auto-generated SBOM files</h1><ul>" > sbom/index.html
