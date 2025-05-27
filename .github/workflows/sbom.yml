@@ -44,21 +44,15 @@ jobs:
 
       - name: Generate index.html
         run: |
-          echo "<h1>SBOM files</h1><ul>" > sbom/index.html
+          echo "<h1>Keysas auto-generated SBOM files</h1><ul>" > sbom/index.html
           for file in sbom/*.xml; do
             name=$(basename "$file")
             echo "<li><a href='$name'>$name</a></li>" >> sbom/index.html
           done
           echo "</ul>" >> sbom/index.html
 
-      - name: Define output folder based on branch
-        run: |
-          mkdir -p output
-          cp -r sbom "output/${GITHUB_REF##*/}"
-
       - name: Deploy on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          keep_files: true
-          publish_dir: ./output
+          publish_dir: ./sbom
