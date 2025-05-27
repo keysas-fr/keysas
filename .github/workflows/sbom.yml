@@ -56,7 +56,9 @@ jobs:
           pip install -r .github/requirements.txt
 
       - name: Build Sphinx docs
-        run: make -C docs html
+        run: |
+          sphinx-quickstart docs
+          make -C docs html
 
       - name: Copy SBOM and docs to output folder
         run: |
