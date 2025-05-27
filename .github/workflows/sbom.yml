@@ -66,6 +66,9 @@ jobs:
           mkdir -p output/$BRANCH_NAME
           cp -r sbom "output/$BRANCH_NAME/sbom"
           cp -r documentation/user_documentation/_build/html "output/$BRANCH_NAME/docs"
+          
+      - name: Copy index.html
+        run: cp .github/assets/index.html output/index.html
 
       - name: Deploy on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
