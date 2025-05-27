@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keysas-admin application &mdash; Keysas v2.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/colors.css?v=b89d75b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1cee7301"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Windows USB firewall" href="windows_firewall.html" />
+    <link rel="prev" title="Decontamination station for USB devices" href="raspberry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Keysas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#software-dependencies">Software dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-keysas">Getting <strong>Keysas</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#clamav-configuration">Clamav configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#system-wide-installation">System wide installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#cross-compiling-for-rpi4">Cross compiling for RPi4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#building-keysas-frontend">Building <strong>Keysas-frontend</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#building-keysas-admin">Building <strong>Keysas-admin</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="networkgw.html">Network gateway (keysas-core)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Administration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="administration.html#design">Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administration.html#system-configuration">System configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#recommendations">Recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#keysas-in">keysas-in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#keysas-transit">keysas-transit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#keysas-out">keysas-out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#systemd-unit-files">Systemd unit files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#apparmor">Apparmor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#libyara-analysis">Libyara analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#from-the-untrusted-network">From the untrusted network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#from-the-trusted-network">From the trusted network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="download.html">Download</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="download.html#lastest-release">Lastest release</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="download.html#keysas-v2-6">Keysas v2.6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="download.html#keysas-v2-5">Keysas v2.5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="raspberry.html">Decontamination station for USB devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#keysas-admin-desktop-client">Keysas-admin (Desktop client)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#fido2-authentication">Fido2 Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#enabling-the-feature">Enabling the Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#initialisation-de-la-yubikey">Initialisation de la Yubikey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#yubikey-initialization">YubiKey Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#revoking-a-yubikey">Revoking a YubiKey</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#using-the-keysas-station">Using the Keysas Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#hardening">Hardening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#required-hardware-to-build-on-raspberry-pi">Required Hardware to build on Raspberry Pi</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Keysas-admin application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ssh-configuration">SSH configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-a-ikpqpki">Generate a IKPQPKI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enroll-you-keysas-stations">Enroll you Keysas stations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sign-your-outgoing-usb-keys">Sign your outgoing USB keys</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="windows_firewall.html">Windows USB firewall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#security-policy-configuration">Security Policy configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#driver-compilation">Driver compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#installer-creation">Installer creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#service-and-application-compilation">Service and application compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#todo-list">TODO List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Keysas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Keysas-admin application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/keysas-admin.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="keysas-admin-application">
+<h1>Keysas-admin application<a class="headerlink" href="#keysas-admin-application" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Keysas-admin</strong> is a desktop application that allows you to manage your <strong>Keysas</strong> stations.
+You can manage your Public Key Infrastucture, register new stations, update them, sign USB devices and much more.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Keysas-admin</strong> only work on GNU/Linux based systems for now !
+To be able to sign USB devices with your current user,
+create a new udev rule <strong>/etc/udev/rules.d/71-keysas.rules</strong> (see later)</p>
+</div>
+<section id="ssh-configuration">
+<h2>SSH configuration<a class="headerlink" href="#ssh-configuration" title="Link to this heading"></a></h2>
+<p>First, start by creating a <strong>Ed25519</strong> private key and the associated public key on your computer
+This keypair should only be dedicated to the administration of your Keysas stations. To do so, open a terminal and use the following command:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">ssh-keygen -m PEM -t ed25519 -f mykey</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The application currently does not support passphrase management or the PKCS#12 format.
+Therefore, you need to enter an empty passphrase by pressing Enter.
+Similarly, the enrollment and revocation features of Yubikeys are not yet supported by the application.</p>
+</div>
+<p>Then, set the path of both keys in the <strong>“Admin configuration-&gt;SSH configuration”</strong> menu</p>
+</section>
+<section id="generate-a-ikpqpki">
+<h2>Generate a IKPQPKI<a class="headerlink" href="#generate-a-ikpqpki" title="Link to this heading"></a></h2>
+<p>To be able to sign your outgoing USB devices and to enroll new Keysas stations, you need to create a <strong>IKPQPKI</strong>
+(Incredible Keysas (Hybrid) Post-Quantum Public Key Infrastucture). This is a PKI basically 😁
+If you have never created a <strong>IKPQPKI</strong>, go to <strong>“Admin configuration-&gt;IKPQPKI configuration”</strong> and click on <strong>“Create a new IKPQPKI”</strong></p>
+<p>Provide the information requested to build your own custom PKI.
+Be patient, this may take a while !</p>
+</section>
+<section id="enroll-you-keysas-stations">
+<h2>Enroll you Keysas stations<a class="headerlink" href="#enroll-you-keysas-stations" title="Link to this heading"></a></h2>
+<p>You can now start adding new <strong>Keysas</strong> stations in the <strong>“Add a new Keysas”</strong> menu providing a name and an IP address
+When done, export the <strong>public SSH</strong> key by clicking the <strong>“Export SSH pubkey”</strong> button for each station added.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Exporting the SSH public key requires that directory <strong>/home/keysas/.ssh/</strong> is already existing on the remote host.</p>
+</div>
+<p>In the menu, go to <strong>“Manage your registered stations”</strong>, click on more, provide your <strong>IKPQPKI</strong> <strong>password</strong> then click on <strong>“Enroll”</strong>
+Be patient, this may take some time !</p>
+</section>
+<section id="sign-your-outgoing-usb-keys">
+<h2>Sign your outgoing USB keys<a class="headerlink" href="#sign-your-outgoing-usb-keys" title="Link to this heading"></a></h2>
+<p>Before starting, you must add a new <strong>udev</strong> to allow your current user wrting USB devices.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Add<span class="w"> </span>the<span class="w"> </span>the<span class="w"> </span>new<span class="w"> </span>udev<span class="w"> </span>rule:
+<span class="go">echo &#39;SUBSYSTEMS==&quot;usb&quot;, MODE=&quot;0660&quot;, TAG+=&quot;uaccess&quot;,ENV{ID_VENDOR_ID}=&quot;$attr{vendor}&quot;,ENV{ID_MODEL_ID}=&quot;$attr{model}&quot;&#39; &gt; /etc/udev/rules.d/71-keysas.rules</span>
+<span class="gp"># </span>Then,<span class="w"> </span>add<span class="w"> </span>your<span class="w"> </span>current<span class="w"> </span>user<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>disk<span class="w"> </span>group:
+<span class="go">usermod -aG disk $LOGNAME</span>
+</pre></div>
+</div>
+<p>You can now start signing at least one USB device in <strong>“Admin configuration-&gt;USB Signing”</strong>.
+Type the <strong>password</strong> provided during your <strong>IKPQPKI</strong> creation, plug the USB key and wait !
+Once again, be patient, this may take a while !
+Now format your USB key using mkfs.xxx in a terminal:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">sudo mkfs.vfat /dev/sda1 #For example</span>
+</pre></div>
+</div>
+<p>If your <strong>Keysas</strong> station has been previously enrolled, your signed USB key should be now recognized by the station.</p>
+<p>You’re now ready to go !</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="raspberry.html" class="btn btn-neutral float-left" title="Decontamination station for USB devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="windows_firewall.html" class="btn btn-neutral float-right" title="Windows USB firewall" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, Stephane N.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
