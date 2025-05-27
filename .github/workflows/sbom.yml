@@ -57,7 +57,7 @@ jobs:
 
       - name: Build Sphinx docs
         run: |
-          sphinx-quickstart docs
+          mkdir docs
           make -C docs html
 
       - name: Copy SBOM and docs to output folder
