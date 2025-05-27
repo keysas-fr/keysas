@@ -8,6 +8,7 @@ on:
 jobs:
   generate-sbom:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,6 +26,7 @@ jobs:
 
       - name: Generate SBOM XML
         run: |
+          mkdir -p sbom
           cargo cyclonedx
           mv keysas-core/keysas-core.cdx.xml sbom/keysas-core.cdx.xml
           mv keysas-backend/keysas-backend.cdx.xml sbom/keysas-backend.cdx.xml
@@ -32,17 +34,17 @@ jobs:
           mv keysas-fido/keysas-fido.cdx.xml sbom/keysas-fido.cdx.xml
           mv keysas-sign/keysas-sign.cdx.xml sbom/keysas-sign.cdx.xml
           mv keysas_lib/keysas_lib.cdx.xml sbom/keysas_lib.cdx.xml
-          
+
       - name: Add XSLT to SBOM XML
         run: |
-          sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' sbom/keysas-backend.cdx.xml
-          sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' sbom/keysas-core.cdx.xml
-          sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' sbom/keysas-fido.cdx.xml
-          sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' sbom/keysas-io.cdx.xml
-          sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' sbom/keysas_lib.cdx.xml
-          sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' sbom/keysas-sign.cdx.xml
+          for file in sbom/*.cdx.xml; do
+            sed -i '1 a <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>' "$file"
+          done
 
-      - name: Generate index.html
+      - name: Copy XSLT to sbom folder
+        run: cp .github/assets/cyclonedx-to-html.xsl sbom/
+
+      - name: Generate index.html for SBOM
         run: |
           echo "<h1>Keysas auto-generated SBOM files</h1><ul>" > sbom/index.html
           for file in sbom/*.xml; do
@@ -51,8 +53,24 @@ jobs:
           done
           echo "</ul>" >> sbom/index.html
 
+      - name: Install Python + Sphinx
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r .github/requirements.txt
+
+      - name: Build Sphinx docs
+        run: make -C docs html
+
+      - name: Copy SBOM and docs to output folder
+        run: |
+          BRANCH_NAME=$(echo "${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]')
+          mkdir -p output/$BRANCH_NAME
+          cp -r sbom "output/$BRANCH_NAME/sbom"
+          cp -r docs/_build/html "output/$BRANCH_NAME/docs"
+
       - name: Deploy on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./sbom
+          publish_dir: ./output
+          keep_files: true
