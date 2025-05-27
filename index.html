@@ -5,70 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Keysas Project</title>
   <style>
+    :root {
+      --primary: #00bdf2;
+      --background: #f9fbfd;
+      --card-bg: #fff;
+      --border: #e1e4e8;
+      --text: #222;
+    }
+
     body {
-      font-family: system-ui, sans-serif;
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: var(--background);
+      color: var(--text);
       padding: 2rem;
-      background: #f9f9f9;
-      color: #333;
     }
-    h1 {
-      font-size: 2em;
-      color: #222;
-    }
-    .section {
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       margin-bottom: 2rem;
     }
-    ul {
+
+    header img {
+      height: 60px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .description {
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .card ul {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
+      margin-top: 1rem;
     }
-    li {
-      margin: 0.5rem 0;
+
+    .card li {
+      margin: 0.6rem 0;
     }
+
     a {
-      color: #0366d6;
       text-decoration: none;
+      color: var(--primary);
     }
+
     a:hover {
       text-decoration: underline;
     }
-    .branch {
-      font-weight: bold;
-      margin-top: 1rem;
-    }
+
     footer {
-      margin-top: 3rem;
-      font-size: 0.9em;
-      color: #888;
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #6a737d;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 The Keysas Project</h1>
 
-  <div class="section">
-    <h2>Available Branches</h2>
+  <header>
+    <img src="https://raw.githubusercontent.com/keysas-fr/keysas/main/img/logo-keysas-github.png" alt="Keysas logo" />
+  </header>
 
-    <div class="branch">
-      🔵 Main
+  <p class="description">
+    Welcome to the public portal of the <strong>Keysas project</strong>. Here you'll find continuously updated user documentation and software bills of materials (SBOMs) for the latest versions of our tools, available per branch.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>🔵 Main Branch</h2>
+      <ul>
+        <li>📘 <a href="main/docs/index.html">User Documentation</a></li>
+        <li>🧾 <a href="main/sbom/index.html">SBOM Files</a></li>
+      </ul>
     </div>
-    <ul>
-      <li><a href="main/docs/index.html">User Documentation</a></li>
-      <li><a href="main/sbom/index.html">Software Bill of Materials (SBOM)</a></li>
-    </ul>
 
-    <div class="branch">
-      🟠 Develop
+    <div class="card">
+      <h2>🟠 Develop Branch</h2>
+      <ul>
+        <li>📘 <a href="develop/docs/index.html">User Documentation</a></li>
+        <li>🧾 <a href="develop/sbom/index.html">SBOM Files</a></li>
+      </ul>
     </div>
-    <ul>
-      <li><a href="develop/docs/index.html">User Documentation</a></li>
-      <li><a href="develop/sbom/index.html">Software Bill of Materials (SBOM)</a></li>
-    </ul>
   </div>
 
   <footer>
-    <p>This page is automatically generated and published by GitHub Actions.</p>
+    <p>🛠️ This site is automatically generated and deployed via GitHub Actions. Last updated from the <code>main</code> and <code>develop</code> branches.</p>
   </footer>
+
 </body>
 </html>
 
