@@ -51,6 +51,11 @@ jobs:
           done
           echo "</ul>" >> sbom/index.html
 
+      - name: Define output folder based on branch
+        run: |
+          mkdir -p output
+          cp -r sbom "output/${GITHUB_REF##*/}"
+          
       - name: Deploy on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
