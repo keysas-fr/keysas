@@ -68,6 +68,6 @@ On Debian Trixie:
 
 Install libyara10 and libwebkit2gtk-4.1-dev instead
 
-## User documentation
+## User documentation & SBOMs
 
-User documentation can be found here : [https://keysas.fr](https://keysas.fr)
+User documentation and Software Bills Of Materials are generated via github actions and can be found here : [https://keysas-fr.github.io/keysas/](https://keysas-fr.github.io/keysas/)
