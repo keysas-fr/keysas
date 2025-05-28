@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration &mdash; Keysas v2.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/colors.css?v=b89d75b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1cee7301"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Network gateway (keysas-core)" href="networkgw.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Keysas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#software-dependencies">Software dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-keysas">Getting <strong>Keysas</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#clamav-configuration">Clamav configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#system-wide-installation">System wide installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#cross-compiling-for-rpi4">Cross compiling for RPi4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#building-keysas-frontend">Building <strong>Keysas-frontend</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#building-keysas-admin">Building <strong>Keysas-admin</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="networkgw.html">Network gateway (keysas-core)</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Administration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#design">Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#system-configuration">System configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#recommendations">Recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keysas-in">keysas-in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keysas-transit">keysas-transit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keysas-out">keysas-out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#systemd-unit-files">Systemd unit files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apparmor">Apparmor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libyara-analysis">Libyara analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#from-the-untrusted-network">From the untrusted network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#from-the-trusted-network">From the trusted network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="download.html">Download</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="download.html#lastest-release">Lastest release</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="download.html#keysas-v2-6">Keysas v2.6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="download.html#keysas-v2-5">Keysas v2.5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="raspberry.html">Decontamination station for USB devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#keysas-admin-desktop-client">Keysas-admin (Desktop client)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#fido2-authentication">Fido2 Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#enabling-the-feature">Enabling the Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#initialisation-de-la-yubikey">Initialisation de la Yubikey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#yubikey-initialization">YubiKey Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#revoking-a-yubikey">Revoking a YubiKey</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#using-the-keysas-station">Using the Keysas Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#hardening">Hardening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#required-hardware-to-build-on-raspberry-pi">Required Hardware to build on Raspberry Pi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keysas-admin.html">Keysas-admin application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#ssh-configuration">SSH configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#generate-a-ikpqpki">Generate a IKPQPKI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#enroll-you-keysas-stations">Enroll you Keysas stations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#sign-your-outgoing-usb-keys">Sign your outgoing USB keys</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="windows_firewall.html">Windows USB firewall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#security-policy-configuration">Security Policy configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#driver-compilation">Driver compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#installer-creation">Installer creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#service-and-application-compilation">Service and application compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#todo-list">TODO List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Keysas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="networkgw.html">Network gateway (keysas-core)</a></li>
+      <li class="breadcrumb-item active">Administration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/administration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="administration">
+<h1>Administration<a class="headerlink" href="#administration" title="Link to this heading"></a></h1>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="Link to this heading"></a></h2>
+<p><strong>Keysas</strong> provides three different daemons running at the same time and three different configuration files to be able to configure each daemon.
+The following schema explains the logic behind <strong>Keysas</strong>.</p>
+<img alt="_images/keysas-core-architecture.png" src="_images/keysas-core-architecture.png" />
+<p>Untrusted files are deposited (via rsync over ssh) in the entry SAS (in).</p>
+<p><strong>Keysas-in</strong>, the first daemon will take some metadata (name, date, sha256) of each file discovered and send each file descriptor (as raw)
+to the second daemon <strong>Keysas-transit</strong> with the associated metadata using an abstract socket.
+When done, <strong>Keysas-in</strong> simply unlink(at) the files.</p>
+<p><strong>Keysas-transit</strong> receives the file descriptor through the abstract socket and metadata. It automatically verifies the sha256 digest, scans the file descriptors using <strong>Clamav</strong> and <strong>Yara</strong>.
+It also performs a size and magic number verification.
+Each test and verification is added to metadata and sent to <strong>Keysas-out</strong>.</p>
+<p><strong>Keysas-out</strong> receives the raw file descriptors and metadata through a dedicated abstract socket.
+It immediately verifies the sha256 digest. If a file is considered unhealthy (reading metadata), the file descriptor is definitly closed.
+If not the file descriptor is copied into the outgoing SAS with a report containing the metadata associated.
+If enrolled using <strong>Keysas-admin</strong>, it also performs an hybrid post-quantum signature using Ed25519/Ml-Dsa-87 on each file and linked report containing the file metadata and the station analysis.</p>
+</section>
+<section id="system-configuration">
+<h2>System configuration<a class="headerlink" href="#system-configuration" title="Link to this heading"></a></h2>
+<section id="recommendations">
+<h3>Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading"></a></h3>
+<p>Here are some recommendations and best practices to use <strong>Keysas</strong> in good conditions.</p>
+<div class="admonition-system-hardening-recommendations admonition">
+<p class="admonition-title">System hardening recommendations.</p>
+<p>The GNU/Linux system used should be hardened according to the best practices such as <em>ANSSI</em>, <em>CIS</em>, <em>STIG</em> etc.</p>
+<p>You can take a look at the following: <a class="reference external" href="https://cyber.gouv.fr/en/publications/configuration-recommendations-gnulinux-system">https://cyber.gouv.fr/en/publications/configuration-recommendations-gnulinux-system</a></p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Network Cards (Only for network gateway)</p>
+<dl class="simple">
+<dt>We recommend to set up at least four network cards:</dt><dd><ul class="simple">
+<li><p>One dedicated card and IP address for the untrusted network;</p></li>
+<li><p>One dedicated card and IP address for the trusted network;</p></li>
+<li><p>One dedicated card and IP address for the administration tasks;</p></li>
+<li><p>One dedicated card and IP address for Syslog.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">OpenSSH configuration (Only for network gateway)</p>
+<dl class="simple">
+<dt>You can set up three separate OpenSSH daemons:</dt><dd><ul class="simple">
+<li><p>One for the <em>administration</em> network;</p></li>
+<li><p>One for the <em>untrusted</em> network;</p></li>
+<li><p>One for the <em>trusted</em> network.</p></li>
+</ul>
+</dd>
+<dt>Alternatively, you can choose to set up only two separate OpenSSH daemons:</dt><dd><ul class="simple">
+<li><p>One for the <em>administration</em> network;</p></li>
+<li><p>One for the <em>untrusted</em> network and the <em>trusted</em> network.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<p>A third solution would be to reserve an SSH access using a dedicated daemon and a dedicated network.</p>
+<blockquote>
+<div><p><strong>In any cases, you should configure allowed users and networks in your sshd configuration:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># OpenSSH daemon listening on the *untrusted_network*:</span>
+AllowUsers<span class="w"> </span>untrusted_user@untrusted_network<span class="w"> </span>untrusted_user2@untrusted_network
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># OpenSSH daemon listening on the *trusted_network*:</span>
+AllowUsers<span class="w"> </span>trusted_user@trusted_network<span class="w"> </span>trusted_user2@trusted_network
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># OpenSSH daemon listening on the *administration_network*:</span>
+AllowUsers<span class="w"> </span>admin_user@administration_network<span class="w"> </span>admin_user2@administration_network
+</pre></div>
+</div>
+<p>Explanations about creating <em>untrusted_users</em> and <em>trusted_users</em> can be found in the <a class="reference internal" href="usage.html#usage"><span class="std std-ref">Usage</span></a> section.</p>
+</div></blockquote>
+</section>
+<section id="keysas-in">
+<h3>keysas-in<a class="headerlink" href="#keysas-in" title="Link to this heading"></a></h3>
+<p><strong>keysas-in</strong> daemon is responsible for sending file descriptors in the entry point directory.
+The ELF binary is installed under:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/keysas-in</span>
+</pre></div>
+</div>
+<p>The configuration file for this daemon is:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/keysas/keysas-in.conf</span>
+</pre></div>
+</div>
+<p>The corresponding logs:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">journalctl -fu keysas-in.service</span>
+</pre></div>
+</div>
+<p>Let’s take a look at the configuration:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>view<span class="w"> </span>/etc/keysas/keysas-in.conf
+</pre></div>
+</div>
+<p>It should look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keysas-in configuration file</span>
+<span class="c1"># This file is part of keysas</span>
+
+<span class="c1"># Socket_in path</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="nv">SOCKET_IN</span><span class="o">=</span>socket_in
+
+<span class="c1"># Path where incoming files will be deposited</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="c1"># Pay attention to add a slash at the end.</span>
+<span class="nv">SAS_IN</span><span class="o">=</span>/var/local/in/
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not modify this parameters unless you really know what to do.</p>
+</div>
+</section>
+<section id="keysas-transit">
+<h3>keysas-transit<a class="headerlink" href="#keysas-transit" title="Link to this heading"></a></h3>
+<p><strong>keysas-transit</strong> is mainly responsible for perfoming <strong>Clamav</strong> and <strong>Yara</strong> scans and verifying size limit and forbidden file formats based on their <strong>magic numbers</strong>.</p>
+<p>The ELF binary is installed under:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/keysas-transit</span>
+</pre></div>
+</div>
+<p>The configuration file for this daemon is:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/keysas/keysas-transit.conf</span>
+</pre></div>
+</div>
+<p>The corresponding logs:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">journactl -fu keysas-transit.service</span>
+</pre></div>
+</div>
+<p>Let’s now take a look at the configuration of the second daemon called <em>keysas-transit</em>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>view<span class="w"> </span>/etc/keysas/keysas-transit.conf
+</pre></div>
+</div>
+<p>It should look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keysas-transit configuration file</span>
+<span class="c1"># This file is part of keysas.</span>
+<span class="c1">#</span>
+<span class="c1"># Socket_in path</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="c1"># Pay attention to add a slash at the end</span>
+<span class="nv">SOCKET_IN</span><span class="o">=</span>socket_in
+
+<span class="c1"># Socket_out path</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="c1"># Pay attention to add a slash at the end</span>
+<span class="nv">SOCKET_OUT</span><span class="o">=</span>socket_out
+
+<span class="c1"># Max file size to be transfered</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="nv">MAX_SIZE</span><span class="o">=</span><span class="m">500000000</span>
+
+<span class="c1"># Path to Yara rules (don&#39;t forget to add index.yar)</span>
+<span class="nv">RULES</span><span class="o">=</span>/usr/share/keysas/rules/index.yar
+
+<span class="c1"># Yara max file size to scan</span>
+<span class="c1"># The bigger it is, the longer it takes to scan a file !</span>
+<span class="c1"># Default is 50Mo (50000000 bytes)</span>
+<span class="nv">YARA_MAXFILESIZE</span><span class="o">=</span><span class="m">50000000</span>
+
+<span class="c1"># Yara timeout when scannning files</span>
+<span class="nv">YARA_TIMEOUT</span><span class="o">=</span><span class="m">1000</span>
+
+<span class="c1"># Tells if keysas should remove the file if Yara matched at least one rule</span>
+<span class="nv">YARA_CLEAN</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="c1"># Clamd server IP</span>
+<span class="c1"># Note that if you modify this address, you also</span>
+<span class="c1"># have to edit the following file</span>
+<span class="c1"># /etc/systemd/system/keysas-in.service.d/keysas-in.conf</span>
+<span class="c1"># to allow sockets via systemd.</span>
+<span class="c1"># See https://keysas.fr/configuration.html#systemd</span>
+<span class="c1"># for more information.</span>
+<span class="nv">CLAMAV_IP</span><span class="o">=</span><span class="m">127</span>.0.0.1
+
+<span class="c1"># Clamd server port</span>
+<span class="nv">CLAMAV_PORT</span><span class="o">=</span><span class="m">3310</span>
+
+<span class="c1"># Set here a whitelist (comma separated) of allowed file types</span>
+<span class="c1"># For example:</span>
+<span class="c1"># ALLOWED_TYPES=&quot;deb,rpm&quot;</span>
+<span class="c1"># See https://keysas.fr/administration.html#keysas-transit for more information.</span>
+<span class="nv">ALLOWED_TYPES</span><span class="o">=</span><span class="s2">&quot;jpg,png,bmp,mp4,m4v,avi,wmv,mpg,flv,mp3,wav,ogg,epub,mobi,doc,docx,xls,xlsx,ppt,pptx&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not modify <strong>SOCKET_IN</strong>, <strong>SOCKET_OUT</strong> parameters unless you really know what to do.</p>
+</div>
+<p>You might want to ajust <strong>MAX_SIZE</strong>, <strong>YARA_MAXFILESIZE</strong>, <strong>YARA_TIMEOUT</strong>, <strong>YARA_CLEAN</strong> and <strong>ALLOWED_TYPES</strong> according to your needs.</p>
+<section id="yara-maxfilesize">
+<h4>YARA_MAXFILESIZE<a class="headerlink" href="#yara-maxfilesize" title="Link to this heading"></a></h4>
+<p>This parameter sets the maximum file size (in bytes) to be scanned. The bigger it is, the longer it can take to scan a file !
+You should set this option to the same value as MAX_SIZE to be consistant.
+If a file is bigger than YARA_MAXFILESIZE, it is deleted.</p>
+</section>
+<section id="yara-timeout">
+<h4>YARA_TIMEOUT<a class="headerlink" href="#yara-timeout" title="Link to this heading"></a></h4>
+<p>This parameter sets a timeout (in seconds) to scan a file.
+If a file scan takes too long because of a big file, you can adjust the timeout here.</p>
+</section>
+<section id="yara-clean">
+<h4>YARA_CLEAN<a class="headerlink" href="#yara-clean" title="Link to this heading"></a></h4>
+<p>This parameter tells if <strong>Keysas</strong> should remove the file if Yara matched at least one rule.</p>
+</section>
+<section id="allowed-types">
+<h4>ALLOWED_TYPES<a class="headerlink" href="#allowed-types" title="Link to this heading"></a></h4>
+<p>This parameter creates a whitelist of allowed file types. Types not explicitly
+listed here simply won’t by transfered. The type are infered from the content
+of the file (not from their extension). The known types and associated mime
+type are listed here: <a class="reference external" href="https://github.com/bojand/infer#supported-types">https://github.com/bojand/infer#supported-types</a></p>
+</section>
+</section>
+<section id="keysas-out">
+<h3>keysas-out<a class="headerlink" href="#keysas-out" title="Link to this heading"></a></h3>
+<p>The last daemon called <strong>keysas-out</strong> is only responsible for writing the file descriptors and the reports on the directory outgoing directory.</p>
+<p>The ELF binary is installed under:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/keysas-out</span>
+</pre></div>
+</div>
+<p>The configuration file for this daemon is:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/keysas/keysas-out.conf</span>
+</pre></div>
+</div>
+<p>The corresponding logs:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">journalctl -fu keysas-out.service</span>
+</pre></div>
+</div>
+<p>Finally, here is the configuration of the last daemon called <em>keysas-out</em>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/keysas/keysas-out.conf</span>
+</pre></div>
+</div>
+<p>It should look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keysas-out configuration file</span>
+<span class="c1"># This file is part of keysas</span>
+<span class="c1">#</span>
+<span class="c1"># Socket_out path</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="c1"># Pay attention to add a slash at the end</span>
+<span class="nv">SOCKET_OUT</span><span class="o">=</span>socket_out
+
+<span class="c1"># Path where incoming files will be deposited</span>
+<span class="c1"># You should not touch this parameter.</span>
+<span class="c1"># Pay attention to add a slash at the end</span>
+<span class="nv">SAS_OUT</span><span class="o">=</span>/var/local/out/
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should not modify <strong>SOCKET_OUT</strong> and <strong>KEYSASAS_OUTSOUT</strong> parameters.</p>
+</div>
+</section>
+<section id="systemd-unit-files">
+<h3>Systemd unit files<a class="headerlink" href="#systemd-unit-files" title="Link to this heading"></a></h3>
+<p>We won’t discuss here how <strong>Keysas</strong>’s systemd hardening is made, as it is not much interesting. We will simply explain how to reconfigure <strong>keysas-in</strong>’s unit if you need to run the Clamav daemon on another server.</p>
+<p><em>Systemd</em> units are splitted into two differrent files. In case of <strong>keysas-in</strong>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/systemd/system/keysas-in.service</span>
+</pre></div>
+</div>
+<p>This fragment contains the basic configuration of the unit. You do not need to modify this one.</p>
+<p>And :</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/etc/systemd/system/keysas-in.service.d/security.conf</span>
+</pre></div>
+</div>
+<p>This is where comes the hardening part of the unit. The security.conf file is a drop-in systemd file. It is automatically concatenated with the fragment part of the unit.
+You can see the entire resulting unit using the following command:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>systemctl<span class="w"> </span>cat<span class="w"> </span>keysas-in
+</pre></div>
+</div>
+<p>If you want to allow <strong>keysas-in</strong> to communicate with a <em>Clamav</em> server listening on IP 192.168.1.43:</p>
+<div class="note admonition">
+<p class="admonition-title">Edit the Systemd unit</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>/etc/systemd/system/keysas-in.service.d/security.conf
+<span class="go">IPAddressAllow=127.0.0.1/8</span>
+</pre></div>
+</div>
+<p>Change the above parameter with:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>/etc/systemd/system/keysas-in.service.d/security.conf
+<span class="go">IPAddressAllow=192.168.1.43/32</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to provide a netmask, Systemd requires it !</p>
+</div>
+<p>Then, reload the daemon:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</pre></div>
+</div>
+<p>and restart <strong>keysas</strong>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keysas
+</pre></div>
+</div>
+<p>And that’s it, you’re all done !</p>
+<p>Here is the security result achieved by default according to the <strong>systemd analyse-security</strong> command:</p>
+<img alt="_images/systemd-security.png" src="_images/systemd-security.png" />
+</section>
+<section id="apparmor">
+<h3>Apparmor<a class="headerlink" href="#apparmor" title="Link to this heading"></a></h3>
+<p>From <em>Wikipedia</em> :</p>
+<p>“AppArmor (Application Armor) is a Linux kernel security module that allows the system administrator to restrict
+programs capabilities with per-program profiles. Profiles can allow capabilities like network access, raw socket access,
+and the permission to read, write, or execute files on matching paths.”</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although we are working on supporting SELinux, <strong>Keysas</strong> is only providing Apparmor profiles at this time.</p>
+</div>
+<p><strong>Apparmor</strong> profiles are located here:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>/etc/apparmor.d/usr.bin.keysas-in</p></li>
+<li><p>/etc/apparmor.d/usr.bin.keysas-transit</p></li>
+<li><p>/etc/apparmor.d/usr.bin.keysas-out</p></li>
+</ul>
+</div></blockquote>
+<p>You will probably never have to modify them (it is not recommended anyway). Nevertheless, in case you need to update them, do not forget to reload the changed profile:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apparmor_parser<span class="w"> </span>-r<span class="w"> </span>/etc/apparmor.d/usr.bin.keysas-in
+</pre></div>
+</div>
+<p>Then, verify that the profile is still in <strong>enforce mode</strong>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>aa-status
+<span class="go">9 processes are in enforce mode.</span>
+<span class="go">  /usr/bin/freshclam (1580)</span>
+<span class="go">  /usr/bin/keysas-in (433022)</span>
+<span class="go">  /usr/bin/keysas-out (433027)</span>
+<span class="go">  /usr/bin/keysas-transit (433025)</span>
+<span class="go">  /usr/sbin/clamd (966)</span>
+<span class="go">  ...</span>
+</pre></div>
+</div>
+</section>
+<section id="libyara-analysis">
+<h3>Libyara analysis<a class="headerlink" href="#libyara-analysis" title="Link to this heading"></a></h3>
+<p><strong>keysas-transit</strong> daemon is able to perform a <em>Yara</em> scan on transfered files according to the rules defined in path:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/share/keysas/rules/index.yar</span>
+</pre></div>
+</div>
+<p>This file act as an index listing a subset of rules.</p>
+<p>The default target <strong>make install-yararules</strong> already clones a lot of usefull rules from various repositories , but you can easily create your own rules.
+Include your custom rules into /usr/share/keysas/rules/index.yar, like that :</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">include &quot;./custom/custom_rule.yar&quot;</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Help</p>
+<p>You should test every new rules before adding them in production.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="networkgw.html" class="btn btn-neutral float-left" title="Network gateway (keysas-core)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, Stephane N.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

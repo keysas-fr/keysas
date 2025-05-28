@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; Keysas v2.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/colors.css?v=b89d75b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1cee7301"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Network gateway (keysas-core)" href="networkgw.html" />
+    <link rel="prev" title="Keysas" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Keysas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#software-dependencies">Software dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-keysas">Getting <strong>Keysas</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clamav-configuration">Clamav configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-wide-installation">System wide installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-compiling-for-rpi4">Cross compiling for RPi4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-keysas-frontend">Building <strong>Keysas-frontend</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-keysas-admin">Building <strong>Keysas-admin</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="networkgw.html">Network gateway (keysas-core)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Administration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="administration.html#design">Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administration.html#system-configuration">System configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#recommendations">Recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#keysas-in">keysas-in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#keysas-transit">keysas-transit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#keysas-out">keysas-out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#systemd-unit-files">Systemd unit files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#apparmor">Apparmor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="administration.html#libyara-analysis">Libyara analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#from-the-untrusted-network">From the untrusted network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#from-the-trusted-network">From the trusted network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="download.html">Download</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="download.html#lastest-release">Lastest release</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="download.html#keysas-v2-6">Keysas v2.6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="download.html#keysas-v2-5">Keysas v2.5</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="raspberry.html">Decontamination station for USB devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#keysas-admin-desktop-client">Keysas-admin (Desktop client)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#fido2-authentication">Fido2 Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#enabling-the-feature">Enabling the Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#initialisation-de-la-yubikey">Initialisation de la Yubikey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#yubikey-initialization">YubiKey Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raspberry.html#revoking-a-yubikey">Revoking a YubiKey</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#using-the-keysas-station">Using the Keysas Station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#hardening">Hardening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raspberry.html#required-hardware-to-build-on-raspberry-pi">Required Hardware to build on Raspberry Pi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keysas-admin.html">Keysas-admin application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#ssh-configuration">SSH configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#generate-a-ikpqpki">Generate a IKPQPKI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#enroll-you-keysas-stations">Enroll you Keysas stations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keysas-admin.html#sign-your-outgoing-usb-keys">Sign your outgoing USB keys</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="windows_firewall.html">Windows USB firewall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#security-policy-configuration">Security Policy configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows_firewall.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#driver-compilation">Driver compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#installer-creation">Installer creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#service-and-application-compilation">Service and application compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windows_firewall.html#todo-list">TODO List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Keysas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>The following installation steps will guide you through compiling Keysas from sources and installing it on a Debian 12 (Bookworm) system.</p>
+<section id="software-dependencies">
+<h2>Software dependencies<a class="headerlink" href="#software-dependencies" title="Link to this heading"></a></h2>
+<p>To compile Keysas from sources, let’s start by installing the required dependencies:</p>
+<div class="note admonition">
+<p class="admonition-title">Dependencies installation</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb http://deb.debian.org/debian bookworm-backports main contrib non-free&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/sources.list.d/backports.list
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+$<span class="w"> </span>apt<span class="w"> </span>-qy<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libyara-dev<span class="w"> </span>libyara9<span class="w"> </span>wget<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>lsb-release<span class="w"> </span>software-properties-common<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>libseccomp-dev<span class="w"> </span>clamav-daemon<span class="w"> </span>clamav-freshclam<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>pkg-config<span class="w"> </span>git<span class="w"> </span>acl<span class="w"> </span>rsync<span class="w"> </span>bash<span class="w"> </span>libudev-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>libwebkit2gtk-4.0-dev<span class="w"> </span>build-essential<span class="w"> </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>wget<span class="w"> </span>libssl-dev<span class="w"> </span>apparmor<span class="w"> </span>ssh<span class="w"> </span>libgtk-3-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>libayatana-appindicator3-dev<span class="w"> </span>librsvg2-dev
+
+<span class="c1"># Install rustup</span>
+$<span class="w"> </span>curl<span class="w"> </span>--proto<span class="w"> </span><span class="s1">&#39;=https&#39;</span><span class="w"> </span>--tlsv1.2<span class="w"> </span>-sSf<span class="w"> </span>https://sh.rustup.rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+
+<span class="c1"># Install the LLVM toolchain</span>
+$<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>wget<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span>https://apt.llvm.org/llvm.sh<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="c1"># Install the nightly rust toolchain</span>
+$<span class="w"> </span>curl<span class="w"> </span>https://sh.rustup.rs<span class="w"> </span>-sSf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-s<span class="w"> </span>--<span class="w"> </span>--default-toolchain<span class="w"> </span>nightly<span class="w"> </span>-y
+$<span class="w"> </span>rustup<span class="w"> </span>default<span class="w"> </span>nightly
+</pre></div>
+</div>
+</div>
+</section>
+<section id="getting-keysas">
+<h2>Getting <strong>Keysas</strong><a class="headerlink" href="#getting-keysas" title="Link to this heading"></a></h2>
+<p>A pre-compiled <strong>Keysas</strong> binary for <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> architecture is at your
+disposal. We recommend using the latest version here:
+<a class="reference external" href="https://github.com/keysas-fr/keysas/releases">https://github.com/keysas-fr/keysas/releases</a></p>
+<dl class="simple">
+<dt>Download the following files of lastest stable version.</dt><dd><ul class="simple">
+<li><p>keysas-vx.y.z.-x86_64.zip</p></li>
+<li><p>keysas-vx.y.z.-x86_64.zip.sha256</p></li>
+</ul>
+</dd>
+</dl>
+<p>Verify the sha256sum and compare it to the keysas-vx.y.z.zip.sha256
+file:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>diff<span class="w"> </span>&lt;<span class="o">(</span>sha256sum<span class="w"> </span>keysas-vx.y.z.zip<span class="o">)</span><span class="w"> </span>keysas-vx.y.z.zip.sha256
+<span class="gp">$ </span>unzip<span class="w"> </span>keysas-vx.y.z.zip<span class="w"> </span>-d<span class="w"> </span>keysas
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure that /usr/sbin is present in your $PATH. If not, add it:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/sbin
+</pre></div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">For a source based installation</p>
+<p>Clone the gitlab repository and compile <strong>Keysas</strong></p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>https://github.com/keysas-fr/keysas.git
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>keysas
+<span class="gp">$ </span>make<span class="w"> </span>build
+</pre></div>
+</div>
+</div>
+</section>
+<section id="clamav-configuration">
+<h2>Clamav configuration<a class="headerlink" href="#clamav-configuration" title="Link to this heading"></a></h2>
+<p><strong>Keysas</strong> uses Clamav as a virus scanner for now but additionnal scanners
+could be added in future. You should update your Clamav signature database on regular bases.
+This operation is handled by the <strong>clamav-freshclam</strong> daemon, you have to enable it.</p>
+<p>Make sure that your <strong>clamav-daemon</strong> and <strong>clamav-freshclam</strong> services are up and running</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>systemctl<span class="w"> </span>status<span class="w"> </span>clamav-daemon<span class="w"> </span>clamav-freshclam
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Edit the Clamav configuration</p>
+<p>Enable TCP listening on the <cite>loopback</cite> interface using <cite>port 3310</cite></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#/etc/clamav/clamd.conf</span>
+TCPSocket<span class="w"> </span><span class="m">3310</span>
+TCPAddr<span class="w"> </span><span class="m">127</span>.0.0.1
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that the <strong>StreamMaxLength</strong> (clamd.conf) parameter is consistent with <strong>MAX_SIZE</strong> and <strong>YARA_MAXFILESIZE</strong> (see keysas-transit).</p>
+</div>
+<p>We now need to allow the Clamav daemon to be able to read the /var/local/in
+directory with Apparmor.</p>
+<div class="note admonition">
+<p class="admonition-title">Clamav apparmor profile tweak</p>
+<p>The following <strong>Clamav</strong> apparmor rules are used to authorise <strong>Clamd</strong> scanning the
+entry SAS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#/etc/apparmor.d/local/usr.sbin.clamd</span>
+/var/local/in/<span class="w"> </span>r,
+/var/local/in/*<span class="w"> </span>kr,
+/var/local/in/**<span class="w"> </span>kr,
+</pre></div>
+</div>
+<p>It should be automatically installed during installation.</p>
+</div>
+<p>You can now manually run a signature database update and restart the <strong>Clamav</strong>
+daemon to take the new configurations in account.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>clamav-freshclam
+<span class="gp">$ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>clamav-daemon
+</pre></div>
+</div>
+</section>
+<section id="system-wide-installation">
+<h2>System wide installation<a class="headerlink" href="#system-wide-installation" title="Link to this heading"></a></h2>
+<p>You can now install <strong>Keysas-core</strong> on your system.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>keysas
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install-core
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install-yararules
+</pre></div>
+</div>
+<p>To install the Full USB version of <strong>Keysas</strong> (decontamination station):</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>keysas
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install-yararules
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">False positive detection by Yara rules</p>
+<p>Some Yara rules (for example the <strong>Big_numbers*</strong> series) may give repeated false
+positives on some document types. If you want to remove them, you’ll have to
+locate them in <strong>/usr/share/keysas/rules</strong>, commenting them out and running
+the <strong>index_gen.sh</strong> script.</p>
+</div>
+<p>At the end of the installation, you should see something like this:</p>
+<img alt="_images/install_completed.png" src="_images/install_completed.png" />
+<div class="note admonition">
+<p class="admonition-title">Installation details</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Every binaries (ELF) are installed under <strong>/usr/bin/</strong> ;</p></li>
+<li><p>Systemd units are installed under <strong>/etc/systemd/system/</strong> ;</p></li>
+<li><p>Apparmor profiles are installed under <strong>/etc/apparmor.d/</strong> ;</p></li>
+<li><p>Configuration files are installed under <strong>/etc/keysas/</strong> ;</p></li>
+<li><p>Logs are available using <strong>journalctl</strong> ;</p></li>
+<li><p>Yara rules are installed under <strong>/usr/share/keysas/rules</strong>.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<p>You can now check that every services are up and running (core mode):</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>systemctl<span class="w"> </span>status<span class="w"> </span>keysas<span class="w"> </span>keysas-in<span class="w"> </span>keysas-transit<span class="w"> </span>keysas-out
+</pre></div>
+</div>
+<p>If you want to check the full installation (USB mode):</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>systemctl<span class="w"> </span>status<span class="w"> </span>keysas<span class="w"> </span>keysas-in<span class="w"> </span>keysas-transit<span class="w"> </span>keysas-out<span class="w"> </span>keysas-io<span class="w"> </span>keysas-backend
+</pre></div>
+</div>
+</section>
+<section id="cross-compiling-for-rpi4">
+<h2>Cross compiling for RPi4<a class="headerlink" href="#cross-compiling-for-rpi4" title="Link to this heading"></a></h2>
+<p>If you don’t have a RPi4 with all the needed dependencies at hand, you may
+try to cross compile via docker and qemu via <a class="reference external" href="https://github.com/multiarch/qemu-user-static">multiarch/qemu-user-static</a>.</p>
+<p>Create the following <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>:</p>
+<div class="highlight-Dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">rust:latest</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>--assume-yes<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libatk1.0-dev:arm64<span class="w"> </span>libglib2.0-dev:arm64<span class="w"> </span>libcairo-5c-dev:arm64<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libpango1.0-dev:arm64<span class="w">  </span>libgtk-3-dev:arm64<span class="w"> </span>libsoup-3.0-dev:arm64<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libjavascriptcoregtk-4.1-dev:arm64<span class="w"> </span>libudev-dev:arm64<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libwebkit2gtk-4.1-dev:arm64
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>--assume-yes<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libclang-dev:arm64<span class="w"> </span>cmake:arm64<span class="w"> </span>libyara-dev:arm64<span class="w"> </span>libseccomp-dev:arm64
+<span class="k">RUN</span><span class="w"> </span>rustup<span class="w"> </span>toolchain<span class="w"> </span>install<span class="w"> </span>--force-non-host<span class="w"> </span>nightly-aarch64-unknown-linux-gnu
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">CMD</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;cargo&quot;</span>,<span class="w">  </span><span class="s2">&quot;+nightly&quot;</span>,<span class="s2">&quot;build&quot;</span>,<span class="w"> </span><span class="s2">&quot;--target&quot;</span>,<span class="w"> </span><span class="s2">&quot;aarch64-unknown-linux-gnu&quot;</span>,<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span><span class="s2">&quot;--workspace&quot;</span>,<span class="w"> </span><span class="s2">&quot;--exclude&quot;</span>,<span class="w"> </span><span class="s2">&quot;keysas-admin&quot;</span>,<span class="w"> </span><span class="s2">&quot;--release&quot;</span><span class="w"> </span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Allow docker to build via qemu:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>multiarch/qemu-user-static<span class="w"> </span>--reset<span class="w"> </span>-p<span class="w"> </span>yes
+</pre></div>
+</div>
+<p>Build and run the docker image:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>build<span class="w"> </span>--platform<span class="o">=</span>linux/arm64/v8<span class="w"> </span>.<span class="w"> </span>-t<span class="w"> </span>keysas-build/aarch64
+<span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--platform<span class="o">=</span>linux/arm64/v8<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">:/app&quot;</span><span class="w"> </span>keysas-build/aarch64
+</pre></div>
+</div>
+<p>The resulting files will be in the <code class="docutils literal notranslate"><span class="pre">target/release</span></code> directory.</p>
+<p>Until the rust image is migrated to debian 13,  you will see some errors when
+compiling the <code class="docutils literal notranslate"><span class="pre">yara</span></code> crate, You need to downgrade it to <code class="docutils literal notranslate"><span class="pre">0.29.0</span></code> (see
+<a class="reference external" href="https://github.com/keysas-fr/keysas/issues/80#issuecomment-2889949214">related issue
+comment</a>).</p>
+</section>
+<section id="building-keysas-frontend">
+<h2>Building <strong>Keysas-frontend</strong><a class="headerlink" href="#building-keysas-frontend" title="Link to this heading"></a></h2>
+<p><strong>Keysas-frontend</strong> is a read-only Vue-JS application to help visualizing transfers for the end-user.</p>
+<p>Go to the <strong>keysas-frontend</strong> directory and install the dependencies using npm:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>npm<span class="w"> </span>i
+</pre></div>
+</div>
+<p>One done, you can build the application:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>npm<span class="w"> </span>run<span class="w"> </span>build
+</pre></div>
+</div>
+<p>The application is now built into the dist directory. Copy the content of this directory at the root of a local webserver (like nginx for exemple).
+Open now a web browser like firefox and visit the <a class="reference external" href="http://127.0.0.1">http://127.0.0.1</a></p>
+</section>
+<section id="building-keysas-admin">
+<h2>Building <strong>Keysas-admin</strong><a class="headerlink" href="#building-keysas-admin" title="Link to this heading"></a></h2>
+<p><strong>Keysas-admin</strong> requires nvm to be installed to install node and npm.
+Please refer to the nvm documentation for installation instructions.</p>
+<p>For keysas-admin, you need npm version 18:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nvm<span class="w"> </span>install<span class="w"> </span><span class="m">18</span>
+<span class="gp">$ </span>nvm<span class="w"> </span>use<span class="w"> </span><span class="m">18</span>
+</pre></div>
+</div>
+<p>Then, you can build the application using the following command:
+Nevertheless, if you want to build it yourself for testing purposes:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>keysas-admin
+<span class="gp">$ </span>npm<span class="w"> </span>i<span class="w"> </span>vite@latest
+<span class="gp">$ </span>cargo<span class="w"> </span>install<span class="w"> </span>tauri-cli<span class="w"> </span>--version<span class="w"> </span><span class="s2">&quot;^2.0.0&quot;</span><span class="w"> </span>--locked
+<span class="gp">$ </span>cargo<span class="w"> </span>tauri<span class="w"> </span>build
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Keysas-admin</strong> only work on GNU/Linux based systems for now !</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Keysas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="networkgw.html" class="btn btn-neutral float-right" title="Network gateway (keysas-core)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, Stephane N.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
