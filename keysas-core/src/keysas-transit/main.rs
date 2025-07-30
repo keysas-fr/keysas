@@ -9,7 +9,6 @@
  */
 
 #![feature(unix_socket_ancillary_data)]
-#![feature(tcp_quickack)]
 #![warn(unused_extern_crates)]
 #![forbid(non_shorthand_field_patterns)]
 #![warn(dead_code)]
