@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^4.0.2",
-    "@vitejs/plugin-vue": "^5.1.2",
+    "@vitejs/plugin-vue": "^6.0.1",
     "sass": "^1.56.2",
-    "vite": "^5.3.5"
+    "vite": "^7.0.6"
   }
 }
