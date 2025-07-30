@@ -8,7 +8,7 @@ version = "2.6.0"
 edition = "2024"
 
 [dependencies]
-tungstenite = "0.26"
+tungstenite = "0.27"
 serde = "1.0"
 serde_json = "1.0"
 serde_derive = "1.0"
@@ -33,11 +33,11 @@ base64 = "0.22"
 bytemuck = "1.4"
 
 [dev-dependencies]
-criterion = "0.6"
+criterion = "0.7"
 env_logger = "0.11"
 input_buffer = "0.5"
-socket2 = "0.5"
-rand = "0.8"
+socket2 = "0.6"
+rand = "0.9"
 
 [[bin]]
 name = "keysas-io"
