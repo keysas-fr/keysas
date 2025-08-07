@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:088b8427-1009-4114-b634-c4831150b66c" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:70802706-07ec-452b-bd60-03b996615744" version="1">
   <metadata>
-    <timestamp>2025-07-30T08:51:26.932097667Z</timestamp>
+    <timestamp>2025-08-07T07:26:20.950230561Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -282,19 +282,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#cc@1.2.30">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#cc@1.2.31">
       <author>Alex Crichton &lt;alex@alexcrichton.com&gt;</author>
       <name>cc</name>
-      <version>1.2.30</version>
+      <version>1.2.31</version>
       <description>A build-time dependency for Cargo build scripts to assist in invoking the native C compiler to compile native C code into a static archive to be linked into Rust code. </description>
       <scope>excluded</scope>
       <hashes>
-        <hash alg="SHA-256">deec109607ca693028562ed836a5f1c4b8bd77755c4e132fc5ce11b0b6211ae7</hash>
+        <hash alg="SHA-256">c3a42d84bb6b69d3a8b3eaacf0d88f179e1929695e1ad012b6cf64d9caaa5fd2</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/cc@1.2.30</purl>
+      <purl>pkg:cargo/cc@1.2.31</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/cc</url>
@@ -1697,19 +1697,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.141">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.142">
       <author>Erick Tryzelaar &lt;erick.tryzelaar@gmail.com&gt;, David Tolnay &lt;dtolnay@gmail.com&gt;</author>
       <name>serde_json</name>
-      <version>1.0.141</version>
+      <version>1.0.142</version>
       <description>A JSON serialization file format</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">30b9eff21ebe718216c6ec64e1d9ac57087aad11efc64e32002bce4a0d4c03d3</hash>
+        <hash alg="SHA-256">030fedb782600dcbd6f02d479bf0d817ac3bb40d644745b769d6a96bc3afc5a7</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/serde_json@1.0.141</purl>
+      <purl>pkg:cargo/serde_json@1.0.142</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/serde_json</url>
@@ -2133,7 +2133,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.11.1" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde@1.0.219" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.219" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.141" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.142" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#sha2@0.10.9" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#simple_logger@5.0.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#time@0.3.41" />
@@ -2177,7 +2177,7 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cbc@0.1.2">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cipher@0.4.4" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cc@1.2.30">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cc@1.2.31">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#shlex@1.3.0" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cexpr@0.6.0">
@@ -2194,7 +2194,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libloading@0.8.8" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cmake@0.1.54">
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cc@1.2.30" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cc@1.2.31" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#colored@2.2.0">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#lazy_static@1.5.0" />
@@ -2389,7 +2389,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.40" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.104" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.141">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.142">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.15" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.7.5" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#ryu@1.0.20" />

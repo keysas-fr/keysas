@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:c568f1c4-ac15-4970-a2e3-98d96de71239" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:16335277-a2a4-48c7-b78c-25169ddf1bf6" version="1">
   <metadata>
-    <timestamp>2025-07-30T08:51:26.940309284Z</timestamp>
+    <timestamp>2025-08-07T07:26:20.958179685Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -891,19 +891,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.141">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.142">
       <author>Erick Tryzelaar &lt;erick.tryzelaar@gmail.com&gt;, David Tolnay &lt;dtolnay@gmail.com&gt;</author>
       <name>serde_json</name>
-      <version>1.0.141</version>
+      <version>1.0.142</version>
       <description>A JSON serialization file format</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">30b9eff21ebe718216c6ec64e1d9ac57087aad11efc64e32002bce4a0d4c03d3</hash>
+        <hash alg="SHA-256">030fedb782600dcbd6f02d479bf0d817ac3bb40d644745b769d6a96bc3afc5a7</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/serde_json@1.0.141</purl>
+      <purl>pkg:cargo/serde_json@1.0.142</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/serde_json</url>
@@ -1165,7 +1165,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.11.1" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde@1.0.219" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.219" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.141" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.142" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.27.0" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.3">
@@ -1277,7 +1277,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.40" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.104" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.141">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.142">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.15" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.7.5" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#ryu@1.0.20" />
