@@ -25,6 +25,8 @@ pub fn init() -> Result<()> {
     ctx.allow_syscall(Syscall::openat)?;
     ctx.allow_syscall(Syscall::getdents64)?;
     ctx.allow_syscall(Syscall::newfstatat)?;
+    ctx.allow_syscall(Syscall::fstat)?;
+    ctx.allow_syscall(Syscall::rt_sigprocmask)?;
     ctx.allow_syscall(Syscall::close)?;
     ctx.allow_syscall(Syscall::read)?;
     ctx.allow_syscall(Syscall::mmap)?;
