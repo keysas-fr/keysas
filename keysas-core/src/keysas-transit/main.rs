@@ -473,6 +473,11 @@ fn send_files(files: &Vec<FileData>, stream: &UnixStream) {
             Ok(_) => info!("File {} sent to Keysas-out.", file.md.filename),
             Err(e) => error!("Failed to send file {e}."),
         }
+        // Close the file descriptor
+        match unistd::close(file.fd) {
+            Ok(_) => info!("File descriptor {} closed for file {}.", file.fd, file.md.filename),
+            Err(e) => error!("Failed to close file descriptor {} for file {}: {e}", file.fd, file.md.filename),
+        }
     }
 }
 
