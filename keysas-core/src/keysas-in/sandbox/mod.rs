@@ -33,6 +33,7 @@ pub fn init() -> Result<()> {
     ctx.allow_syscall(Syscall::write)?;
     ctx.allow_syscall(Syscall::mprotect)?;
     ctx.allow_syscall(Syscall::munmap)?;
+    ctx.allow_syscall(Syscall::mremap)?;
     ctx.allow_syscall(Syscall::statx)?;
     #[cfg(target_arch = "x86_64")]
     ctx.allow_syscall(Syscall::unlink)?;
