@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:8fa087df-48e9-4fb2-b050-7ae8c88f79b3" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:b21bd21a-8b46-426d-92ce-29f816185a8d" version="1">
   <metadata>
-    <timestamp>2025-10-13T08:30:28.909451885Z</timestamp>
+    <timestamp>2025-10-14T07:51:12.934574686Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -355,19 +355,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.8">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.9">
       <author>Bartłomiej Kamiński &lt;fizyk20@gmail.com&gt;, Aaron Trent &lt;novacrazy@gmail.com&gt;</author>
       <name>generic-array</name>
-      <version>0.14.8</version>
+      <version>0.14.9</version>
       <description>Generic types implementing functionality of arrays</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">1dc8f7d2ded5f9209535e4b3fd4d39c002f30902ff5ce9f64e2c33d549576500</hash>
+        <hash alg="SHA-256">4bb6743198531e02858aeaea5398fcc883e71851fcbcb5a2f773e2fb6cb1edf2</hash>
       </hashes>
       <licenses>
         <expression>MIT</expression>
       </licenses>
-      <purl>pkg:cargo/generic-array@0.14.8</purl>
+      <purl>pkg:cargo/generic-array@0.14.9</purl>
       <externalReferences>
         <reference type="documentation">
           <url>http://fizyk20.github.io/generic-array/generic_array/</url>
@@ -750,19 +750,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.12">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.13">
       <author>The Rust Project Developers, Andrew Gallant &lt;jamslam@gmail.com&gt;</author>
       <name>regex-automata</name>
-      <version>0.4.12</version>
+      <version>0.4.13</version>
       <description>Automata construction and matching using regular expressions.</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">722166aa0d7438abbaa4d5cc2c649dac844e8c56d82fb3d33e9c34b5cd268fc6</hash>
+        <hash alg="SHA-256">5276caf25ac86c8d810222b3dbb938e512c55c6831a10f3e6ed1c93b84041f1c</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/regex-automata@0.4.12</purl>
+      <purl>pkg:cargo/regex-automata@0.4.13</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/regex-automata</url>
@@ -775,19 +775,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.7">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.8">
       <author>The Rust Project Developers, Andrew Gallant &lt;jamslam@gmail.com&gt;</author>
       <name>regex-syntax</name>
-      <version>0.8.7</version>
+      <version>0.8.8</version>
       <description>A regular expression parser.</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">c3160422bbd54dd5ecfdca71e5fd59b7b8fe2b1697ab2baf64f6d05dcc66d298</hash>
+        <hash alg="SHA-256">7a2d987857b319362043e95f5353c0535c1f58eec5336fdfcf626430af7def58</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/regex-syntax@0.8.7</purl>
+      <purl>pkg:cargo/regex-syntax@0.8.8</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/regex-syntax</url>
@@ -800,19 +800,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.12.1">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.12.2">
       <author>The Rust Project Developers, Andrew Gallant &lt;jamslam@gmail.com&gt;</author>
       <name>regex</name>
-      <version>1.12.1</version>
+      <version>1.12.2</version>
       <description>An implementation of regular expressions for Rust. This implementation uses finite automata and guarantees linear time matching on all inputs. </description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">4a52d8d02cacdb176ef4678de6c052efb4b3da14b78e4db683a4252762be5433</hash>
+        <hash alg="SHA-256">843bc0191f75f3e22651ae5f1e72939ab2f72a4bc30fa80a066bd66edefc24d4</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/regex@1.12.1</purl>
+      <purl>pkg:cargo/regex@1.12.2</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/regex</url>
@@ -1212,7 +1212,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#log@0.4.28" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#nix@0.30.1" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#nom@8.0.0" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.12.1" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.12.2" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde@1.0.228" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.228" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.145" />
@@ -1225,14 +1225,14 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#autocfg@1.5.0" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#bitflags@2.9.4" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#block-buffer@0.10.4">
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.8" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.9" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#bytes@1.10.1" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cfg-if@1.0.3" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cfg_aliases@0.2.1" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cpufeatures@0.2.17" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#crypto-common@0.1.6">
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.8" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.9" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#typenum@1.19.0" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#data-encoding@2.9.0" />
@@ -1250,7 +1250,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.106" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#fnv@1.0.7" />
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.8">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.9">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#typenum@1.19.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#version_check@0.9.5" />
     </dependency>
@@ -1306,17 +1306,17 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#rand_core@0.9.3">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#getrandom@0.3.3" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.12">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.13">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.3" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.7.6" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.7" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.8" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.7" />
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.12.1">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.8" />
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex@1.12.2">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.3" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.7.6" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.12" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.7" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.13" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.8" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#ryu@1.0.20" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde@1.0.228">

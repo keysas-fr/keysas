@@ -153,13 +153,13 @@
 <p>To compile Keysas from sources, let’s start by installing the required dependencies:</p>
 <div class="note admonition">
 <p class="admonition-title">Dependencies installation</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb http://deb.debian.org/debian bookworm-backports main contrib non-free&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/sources.list.d/backports.list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb http://deb.debian.org/debian trixie-backports main contrib non-free&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/sources.list.d/backports.list
 $<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-$<span class="w"> </span>apt<span class="w"> </span>-qy<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libyara-dev<span class="w"> </span>libyara9<span class="w"> </span>wget<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span><span class="se">\</span>
-<span class="w">                     </span>lsb-release<span class="w"> </span>software-properties-common<span class="w"> </span><span class="se">\</span>
+$<span class="w"> </span>apt<span class="w"> </span>-qy<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libyara-dev<span class="w"> </span>libyara10<span class="w"> </span>wget<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>lsb-release<span class="w"> </span><span class="se">\</span>
 <span class="w">                     </span>libseccomp-dev<span class="w"> </span>clamav-daemon<span class="w"> </span>clamav-freshclam<span class="w"> </span><span class="se">\</span>
 <span class="w">                     </span>pkg-config<span class="w"> </span>git<span class="w"> </span>acl<span class="w"> </span>rsync<span class="w"> </span>bash<span class="w"> </span>libudev-dev<span class="w"> </span><span class="se">\</span>
-<span class="w">                     </span>libwebkit2gtk-4.0-dev<span class="w"> </span>build-essential<span class="w"> </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">                     </span>libwebkit2gtk-4.1-dev<span class="w"> </span>build-essential<span class="w"> </span>curl<span class="w"> </span><span class="se">\</span>
 <span class="w">                     </span>wget<span class="w"> </span>libssl-dev<span class="w"> </span>apparmor<span class="w"> </span>ssh<span class="w"> </span>libgtk-3-dev<span class="w"> </span><span class="se">\</span>
 <span class="w">                     </span>libayatana-appindicator3-dev<span class="w"> </span>librsvg2-dev
 

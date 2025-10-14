@@ -14,13 +14,13 @@ To compile Keysas from sources, let's start by installing the required dependenc
 
  .. code-block:: bash
 
-  $ sudo echo "deb http://deb.debian.org/debian bookworm-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+  $ sudo echo "deb http://deb.debian.org/debian trixie-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
   $ sudo apt update
-  $ apt -qy install -y libyara-dev libyara9 wget cmake make \
-                       lsb-release software-properties-common \
+  $ apt -qy install -y libyara-dev libyara10 wget cmake make \
+                       lsb-release \
                        libseccomp-dev clamav-daemon clamav-freshclam \
                        pkg-config git acl rsync bash libudev-dev \
-                       libwebkit2gtk-4.0-dev build-essential curl \
+                       libwebkit2gtk-4.1-dev build-essential curl \
                        wget libssl-dev apparmor ssh libgtk-3-dev \
                        libayatana-appindicator3-dev librsvg2-dev
 
