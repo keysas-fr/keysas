@@ -77,10 +77,10 @@
 ## Build && Installation
 
 
-### 🐧 On Debian stable (Bookwoom only):
+### 🐧 On Debian stable (Trixie):
 
 ```bash
-sudo apt -qy install -y libyara-dev libyara9 wget cmake make lsb-release software-properties-common libseccomp-dev clamav-daemon clamav-freshclam pkg-config git bash libudev-dev libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev acl xinit sudo 
+sudo apt -qy install -y libyara-dev libyara10 wget cmake make lsb-release libseccomp-dev clamav-daemon clamav-freshclam pkg-config git bash libudev-dev libwebkit2gtk-4.1-dev build-essential curl wget libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev acl xinit sudo 
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
 source "$HOME/.cargo/env"
@@ -90,14 +90,6 @@ make help
 make build
 sudo make install
 ```
-
-
-### 🐧 On Debian Trixie:
-
-
-Install ```libyara10``` and ```libwebkit2gtk-4.1-dev``` instead
-
----
 
 ## User documentation & SBOMs
 
