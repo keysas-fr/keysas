@@ -23,6 +23,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 time = "0.3"
 base64 = "0.22"
+bincode= { version = "2", default-features = false, features = ["std", "derive"] }
 
 [dependencies.oqs]
 version = "0.11"

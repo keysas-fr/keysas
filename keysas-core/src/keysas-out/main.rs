@@ -85,7 +85,7 @@ use std::str;
 mod sandbox;
 
 /// Structure representing a file and its metadata in the daemon
-#[derive(Debug)]
+#[derive(bincode::Decode, Debug)]
 pub struct FileData {
     /// File descriptor
     fd: i32,
@@ -175,8 +175,8 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
         .flatten()
         .filter_map(|fd| {
             // Deserialize metadata into a [FileMetadata] struct
-            match bincode::deserialize_from::<&[u8], FileMetadata>(buffer) {
-                Ok(meta) => Some(FileData { fd, md: meta }),
+            match bincode::decode_from_slice::<FileMetadata, _>(buffer, bincode::config::standard()) {
+                Ok((meta, _)) => Some(FileData { fd, md: meta }),
                 Err(e) => {
                     warn!(
                         "Failed to deserialize message from keysas-transit: {e}, killing myself."

@@ -24,7 +24,6 @@
 #![warn(deprecated)]
 
 use anyhow::Result;
-use bincode::Options;
 use clamav_tcp::scan;
 use clamav_tcp::version;
 use clap::{Arg, ArgAction, Command, crate_version};
@@ -52,11 +51,7 @@ mod sandbox;
 
 const CONFIG_DIRECTORY: &str = "/etc/keysas";
 
-#[macro_use]
-extern crate serde_derive;
-use serde_derive::Deserialize;
-
-#[derive(Deserialize, Debug)]
+#[derive(bincode::Decode, Debug)]
 struct InputMetadata {
     filename: String,
     digest: String,
@@ -64,7 +59,7 @@ struct InputMetadata {
     is_corrupted: bool,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(bincode::Encode, Debug)]
 struct FileMetadata {
     filename: String,
     digest: String,
@@ -241,16 +236,16 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
         .flatten()
         .filter_map(|fd| {
             // Deserialize metadata
-            let _my_options = bincode::DefaultOptions::new().with_limit(4128);
-            match bincode::deserialize_from::<&[u8], InputMetadata>(buffer) {
+            let config = bincode::config::standard().with_limit::<4128>();
+            match bincode::decode_from_slice::<InputMetadata, _>(buffer, config) {
                 Ok(meta) => {
                     // Initialize with failed value by default
-                    log::info!("Receiving fd of file: {}", &meta.filename);
+                    log::info!("Receiving fd of file: {}", &meta.0.filename);
                     Some(FileData {
                         fd,
                         md: FileMetadata {
-                            filename: meta.filename,
-                            digest: meta.digest,
+                            filename: meta.0.filename,
+                            digest: meta.0.digest,
                             is_digest_ok: false,
                             is_toobig: true,
                             size: 0,
@@ -259,8 +254,8 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
                             av_report: Vec::new(),
                             yara_pass: false,
                             yara_report: String::new(),
-                            timestamp: meta.timestamp,
-                            is_corrupted: meta.is_corrupted,
+                            timestamp: meta.0.timestamp,
+                            is_corrupted: meta.0.is_corrupted,
                             file_type: "Unknown".into(),
                         },
                     })
@@ -454,9 +449,10 @@ fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: Strin
 
 /// This functions send the files filedescriptor and metadata to the socket
 fn send_files(files: &Vec<FileData>, stream: &UnixStream) {
+    let config = bincode::config::standard();
     for file in files {
         // Get metadata
-        let data = match bincode::serialize(&file.md) {
+        let data = match bincode::encode_to_vec(&file.md, config) {
             Ok(d) => d,
             Err(e) => {
                 error!("Failed to serialize: {e}");

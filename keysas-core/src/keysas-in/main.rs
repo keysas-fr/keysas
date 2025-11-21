@@ -44,13 +44,11 @@ use time::OffsetDateTime;
 mod sandbox;
 mod tests;
 
-#[macro_use]
-extern crate serde_derive;
 use keysas_lib::{convert_ioslice, init_logger, list_files, sha256_digest};
 
 const CONFIG_DIRECTORY: &str = "/etc/keysas";
 
-#[derive(Serialize, Debug, Clone)]
+#[derive(bincode::Encode, Debug, Clone)]
 struct FileMetadata {
     filename: String,
     digest: String,
@@ -111,6 +109,7 @@ fn command_args(config: &mut Config) {
     if let Some(p) = matches.get_one::<String>("socket_in") {
         config.socket_in = p.to_string();
     }
+
 }
 
 fn is_corrupted(file: PathBuf) -> bool {
@@ -204,10 +203,11 @@ fn send_files(files: &[String], stream: &UnixStream, sas_in: &String) -> Result<
                         Err(e) => error!("Cannot remove ioerror report: {e}"),
                     }
                 }
-                let data: Vec<u8> = match bincode::serialize(&m) {
+                let config = bincode::config::standard();
+                let data: Vec<u8> = match bincode::encode_to_vec(&m, config) {
                     Ok(d) => d,
                     Err(_e) => {
-                        error!("Failed to serialize FileMetadata");
+                        error!("Failed to serialize FileMetadataa");
                         return None;
                     }
                 };
@@ -293,7 +293,7 @@ fn main() -> Result<()> {
         };
 
         send_files(&files, &unix_stream, &config.sas_in)
-            .context("Cannot send file descriptors :/")?;
+            .with_context(|| "Cannot send file descriptors :/")?;
         main_thread::sleep(Duration::from_millis(500));
     }
 }
