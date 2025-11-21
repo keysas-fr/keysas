@@ -357,7 +357,7 @@ fn test_save_and_load_hybrid_signature() {
     //let file = NamedTempDirectory::new().unwrap()
     //let path = file.into_temp_path();
     let temp_dir = tempdir().unwrap();
-    let path = temp_dir.into_path();
+    let path = temp_dir.path().to_path_buf();
 
     // Save the keypair
     hybrid_keypair
