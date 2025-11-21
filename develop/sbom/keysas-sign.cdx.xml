@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:17fab66c-b59a-426c-ace9-c3698c3d4d4d" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:3e6aec73-915f-494b-89ed-ebcea564f46b" version="1">
   <metadata>
-    <timestamp>2025-11-21T11:19:27.761681820Z</timestamp>
+    <timestamp>2025-11-21T12:03:17.493230259Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -10,16 +10,16 @@
         <version>0.5.7</version>
       </tool>
     </tools>
-    <component type="application" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas-sign#2.6.0">
+    <component type="application" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas-sign#2.7.0">
       <name>keysas-sign</name>
-      <version>2.6.0</version>
+      <version>2.7.0</version>
       <scope>required</scope>
-      <purl>pkg:cargo/keysas-sign@2.6.0?download_url=file://.</purl>
+      <purl>pkg:cargo/keysas-sign@2.7.0?download_url=file://.</purl>
       <components>
-        <component type="application" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas-sign#2.6.0 bin-target-0">
+        <component type="application" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas-sign#2.7.0 bin-target-0">
           <name>keysas-sign</name>
-          <version>2.6.0</version>
-          <purl>pkg:cargo/keysas-sign@2.6.0?download_url=file://.#src/main.rs</purl>
+          <version>2.7.0</version>
+          <purl>pkg:cargo/keysas-sign@2.7.0?download_url=file://.#src/main.rs</purl>
         </component>
       </components>
     </component>
@@ -28,11 +28,11 @@
     </properties>
   </metadata>
   <components>
-    <component type="library" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas_lib#2.6.0">
+    <component type="library" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas_lib#2.7.0">
       <name>keysas_lib</name>
-      <version>2.6.0</version>
+      <version>2.7.0</version>
       <scope>required</scope>
-      <purl>pkg:cargo/keysas_lib@2.6.0?download_url=file://../keysas_lib</purl>
+      <purl>pkg:cargo/keysas_lib@2.7.0?download_url=file://../keysas_lib</purl>
     </component>
     <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#aes@0.8.4">
       <author>RustCrypto Developers</author>
@@ -2489,16 +2489,16 @@
     </component>
   </components>
   <dependencies>
-    <dependency ref="path+file:///home/runner/work/keysas/keysas/keysas-sign#2.6.0">
+    <dependency ref="path+file:///home/runner/work/keysas/keysas/keysas-sign#2.7.0">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#anyhow@1.0.100" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#clap@4.5.53" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#ed25519-dalek@2.2.0" />
-      <dependency ref="path+file:///home/runner/work/keysas/keysas/keysas_lib#2.6.0" />
+      <dependency ref="path+file:///home/runner/work/keysas/keysas/keysas_lib#2.7.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#pkcs8@0.10.2" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#tempfile@3.23.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#x509-cert@0.2.5" />
     </dependency>
-    <dependency ref="path+file:///home/runner/work/keysas/keysas/keysas_lib#2.6.0">
+    <dependency ref="path+file:///home/runner/work/keysas/keysas/keysas_lib#2.7.0">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#anyhow@1.0.100" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#base64@0.22.1" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#bincode@2.0.1" />
