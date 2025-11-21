@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:32f071dc-8054-4494-9a2b-52401e8ab7d6" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:2040c902-d0cd-41cf-953c-8585f0db77bb" version="1">
   <metadata>
-    <timestamp>2025-11-21T11:07:25.403303333Z</timestamp>
+    <timestamp>2025-11-21T11:19:27.758073484Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -1054,22 +1054,22 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.27.0">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.28.0">
       <author>Alexey Galakhov, Daniel Abramov</author>
       <name>tungstenite</name>
-      <version>0.27.0</version>
+      <version>0.28.0</version>
       <description>Lightweight stream-based WebSocket implementation</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">eadc29d668c91fcc564941132e17b28a7ceb2f3ebf0b9dae3e03fd7a6748eb0d</hash>
+        <hash alg="SHA-256">8628dcc84e5a09eb3d8423d6cb682965dea9133204e8fb3efee74c2a0c259442</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/tungstenite@0.27.0</purl>
+      <purl>pkg:cargo/tungstenite@0.28.0</purl>
       <externalReferences>
         <reference type="documentation">
-          <url>https://docs.rs/tungstenite/0.27.0</url>
+          <url>https://docs.rs/tungstenite/0.28.0</url>
         </reference>
         <reference type="website">
           <url>https://github.com/snapview/tungstenite-rs</url>
@@ -1216,7 +1216,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde@1.0.228" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.228" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.145" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.27.0" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.28.0" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.4">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.7.6" />
@@ -1354,7 +1354,7 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#thiserror@2.0.17">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#thiserror-impl@2.0.17" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.27.0">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#tungstenite@0.28.0">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#bytes@1.11.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#data-encoding@2.9.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#http@1.3.1" />
