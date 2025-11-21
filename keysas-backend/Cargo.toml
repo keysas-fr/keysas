@@ -8,7 +8,7 @@ edition = "2024"
 
 
 [dependencies]
-tungstenite = "0.27"
+tungstenite = "0.28"
 serde = "1.0"
 serde_json = "1.0"
 serde_derive = "1.0"
