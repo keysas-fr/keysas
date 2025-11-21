@@ -218,6 +218,6 @@ pub fn generate_cert_from_csr(
 
         Ok(cert)
     } else {
-        return Err(anyhow!("Invalid algorithm OID"));
+        Err(anyhow!("Invalid algorithm OID"))
     }
 }
