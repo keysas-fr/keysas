@@ -3,7 +3,7 @@
 
 [package]
 name = "keysas-fido"
-version = "2.6.0"
+version = "2.7.0"
 edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
