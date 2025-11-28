@@ -17,16 +17,32 @@ updates:
       - /keysas-frontend
     schedule:
       interval: daily
-    # Disable version updates for npm dependencies, only open PRs for security updates
-    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      all-non-major-dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: cargo
     directories:
-      - '**/Cargo.toml'
+      - /keysas-firewall/daemon
+      - /keysas-core
+      - /keysas-backend
+      - /keysas-firewall/libmailslot
+      - /keysas_lib
+      - /keysas-firewall/tray-app/src-tauri
+      - /keysas-io
+      - /keysas-sign
+      - /keysas-admin/src-tauri
+      - /keysas-fido
     schedule:
       interval: daily
     groups:
       dependencies:
         patterns:
           - "*"
-    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
