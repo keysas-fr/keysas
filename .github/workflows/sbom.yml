@@ -2,7 +2,7 @@ name: Generate the SBOM and deploy it to GitHub Pages
 
 on:
   push:
-    branches: [Develop, main]
+    branches: [dev, main]
   workflow_dispatch:
 
 permissions:
