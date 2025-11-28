@@ -11,16 +11,22 @@ updates:
       interval: daily
 
   - package-ecosystem: npm
-    directory: /keysas-admin
+    directories:
+      - /keysas-admin
+      - /keysas-firewall/tray-app
+      - /keysas-frontend
     schedule:
       interval: daily
+    # Disable version updates for npm dependencies, only open PRs for security updates
+    open-pull-requests-limit: 0
 
-  - package-ecosystem: npm
-    directory: /keysas-firewall/tray-app
+  - package-ecosystem: cargo
+    directories:
+      - '**/Cargo.toml'
     schedule:
       interval: daily
-
-  - package-ecosystem: npm
-    directory: /keysas-frontend
-    schedule:
-      interval: daily
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
