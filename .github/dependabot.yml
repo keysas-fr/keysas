@@ -1,0 +1,58 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: /.github
+  schedule:
+    interval: daily
+
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: daily
+  groups:
+    actions-updates:
+      patterns:
+      - "*"
+  commit-message:
+    prefix: "Github-Actions"
+
+- package-ecosystem: npm
+  directories:
+  - /keysas-admin
+  - /keysas-firewall/tray-app
+  - /keysas-frontend
+  schedule:
+    interval: daily
+  ignore:
+  - dependency-name: "*"
+    update-types: [ "version-update:semver-major" ]
+  groups:
+    npm-updates:
+      patterns:
+      - "*"
+  commit-message:
+    prefix: "NPM-dependencies"
+
+- package-ecosystem: cargo
+  directories:
+  - /keysas-firewall/daemon
+  - /keysas-core
+  - /keysas-backend
+  - /keysas-firewall/libmailslot
+  - /keysas_lib
+  - /keysas-firewall/tray-app/src-tauri
+  - /keysas-io
+  - /keysas-sign
+  - /keysas-admin/src-tauri
+  - /keysas-fido
+  schedule:
+    interval: daily
+  groups:
+    cargo-updates:
+      patterns:
+      - "*"
+  ignore:
+  - dependency-name: "*"
+    update-types: [ "version-update:semver-major" ]
+  commit-message:
+    prefix: "Cargo-dependencies"
