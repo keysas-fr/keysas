@@ -87,13 +87,22 @@ fn landlock_sandbox() -> Result<(), RulesetError> {
         RulesetStatus::PartiallyEnforced => println!("Landlock: Partially sandboxed."),
         // Users should be warned that they are not protected.
         RulesetStatus::NotEnforced => {
-            println!("Landlock: Not sandboxed! Please update your kernel.")
+            println!("Landlock: Not sandboxed! Please update your kernel.");
         }
     }
     Ok(())
 }
 
 /// List files in a directory except hidden ones
+///
+/// # Errors
+///
+/// This function will return an error in the following situations:
+///
+/// * The provided `directory` does not exist.
+/// * The process lacks permissions to read the contents of `directory`.
+/// * The provided `directory` is not a directory.
+/// * The internal regex for filtering hidden files fails to compile.
 pub fn list_files(directory: &str) -> Result<Vec<String>> {
     let paths: std::fs::ReadDir = fs::read_dir(directory)?;
     let mut names = paths
@@ -111,6 +120,17 @@ pub fn list_files(directory: &str) -> Result<Vec<String>> {
     Ok(names)
 }
 
+/// Get the status of the `keysas-in`, `keysas-transit` and `keysas-out` services.
+///
+/// # Panics
+///
+/// This function will panic if the `systemctl` command fails to execute for any of
+/// the services.
+///
+/// # Errors
+///
+/// This function will return an error if the internal regex for parsing the
+/// `systemctl` output fails to compile.
 pub fn daemon_status() -> Result<[bool; 3]> {
     let mut state: [bool; 3] = [true, true, true];
 
