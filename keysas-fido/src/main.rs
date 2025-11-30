@@ -49,7 +49,7 @@ fn store_key(name: &str, hex_string: &String) -> Result<bool> {
     let store = Store::new(cfg)?;
     let enrolled_yubikeys = store.bucket::<String, String>(Some("Keysas"))?;
 
-    if let Some(_) = enrolled_yubikeys.get(hex_string)? {
+    if if enrolled_yubikeys.get(hex_string)?.is_some() {
         Ok(false)
     } else {
         enrolled_yubikeys.set(hex_string, &name.to_string())?;
@@ -90,7 +90,7 @@ fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
         // In HMAC Mode, the result will always be the SAME for the SAME provided challenge
         let hmac_result = yubi.challenge_response_hmac(challenge.as_bytes(), config)?;
 
-        let v: &[u8] = &*hmac_result;
+        let v: &[u8] = &hmac_result;
         let hex_string = hex::encode(v);
         if enroll && !revoke {
             match store_key(name, &hex_string.clone()) {
@@ -109,7 +109,7 @@ fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
     Ok(())
 }
 
-fn init_yubikey() -> () {
+fn init_yubikey() {
     let mut yubi = Yubico::new();
 
     if let Ok(device) = yubi.find_yubikey() {
