@@ -12,6 +12,8 @@ license = "GPL-3.0-only"
 repository = "https://github.com/keysas-fr/keysas"
 homepage = "https://keysas-fr.github.io/keysas/"
 keywords = ["security", "keysas", "cli", "sign"]
+readme = "README.md"
+categories = ["security", "command-line-utilities", "cryptography"]
 
 [dependencies]
 clap = { version = "4", default-features = false, features = ["std", "cargo"] }

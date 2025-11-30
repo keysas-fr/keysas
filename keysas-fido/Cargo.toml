@@ -11,6 +11,8 @@ license = "GPL-3.0-only"
 repository = "https://github.com/keysas-fr/keysas"
 homepage = "https://keysas-fr.github.io/keysas/"
 keywords = ["security", "keysas", "cli", "fido"]
+readme = "README.md"
+categories = ["security", "command-line-utilities", "cryptography"]
 
 [dependencies]
 yubico_manager = { git = "https://github.com/r3dlight/yubico-manager"}

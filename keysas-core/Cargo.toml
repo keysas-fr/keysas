@@ -11,6 +11,9 @@ description = "Core components for Keysas, a USB security gateway for file analy
 license = "GPL-3.0-only"
 repository = "https://github.com/keysas-fr/keysas"
 homepage = "https://keysas-fr.github.io/keysas/"
+keywords = ["security", "keysas", "file-analysis", "usb", "gateway"]
+readme = "README.md"
+categories = ["security", "command-line-utilities", "cryptography"]
 
 [dependencies]
 anyhow = "1.0"

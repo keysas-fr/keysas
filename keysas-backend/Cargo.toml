@@ -10,6 +10,9 @@ description = "Keysas backend service for handling USB device interactions and f
 license = "GPL-3.0-only"
 repository = "https://github.com/keysas-fr/keysas"
 homepage = "https://keysas-fr.github.io/keysas/"
+keywords = ["security", "keysas", "backend", "usb", "file-analysis"]
+readme = "README.md"
+categories = ["security", "command-line-utilities", "cryptography"]
 
 [dependencies]
 tungstenite = "0.28"

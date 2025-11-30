@@ -12,6 +12,8 @@ description = "Keysas I/O daemon for handling USB devices and file analysis."
 repository = "https://github.com/keysas-fr/keysas"
 homepage = "https://keysas-fr.github.io/keysas/"
 keywords = ["security", "usb", "file-analysis", "pki", "post-quantum"]
+readme = "README.md"
+categories = ["security", "command-line-utilities", "cryptography"]
 
 [dependencies]
 tungstenite = "0.28"
