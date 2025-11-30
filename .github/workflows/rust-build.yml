@@ -101,9 +101,6 @@ jobs:
 
     - name: Run tests
       run: cargo test --verbose --all-features
-        
-    - name: Run docs tests
-      run: cargo test --doc
 
     - name: Run Cargo audit
       run: |
