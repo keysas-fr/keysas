@@ -36,7 +36,7 @@ use pkcs8::der::oid::db::rfc5280;
 use serde_derive::Serialize;
 use std::time::Duration;
 use x509_cert::attr::AttributeTypeAndValue;
-use x509_cert::certificate::*;
+use x509_cert::certificate::{Certificate, TbsCertificate, Version};
 use x509_cert::der::asn1::BitString;
 use x509_cert::ext::Extension;
 use x509_cert::name::RdnSequence;
@@ -64,12 +64,23 @@ pub struct CertificateFields {
 /// Check that
 ///     - it can be parsed into a X509 certificate
 ///     - it is used for signing
-///     - if there is a ca_cert supplied, it signed by the ca
+///     - if there is a `ca_cert` supplied, it signed by the CA
 ///
 /// # Arguments
 ///
 /// * `pem` - Certificate in PEM format
 /// * `ca_cert` - CA certificate either ED25519 or ML-DSA87
+///
+/// # Errors
+///
+/// This function will return an error in the following situations:
+///
+/// * The provided `pem` string cannot be parsed as a valid PEM certificate.
+/// * The CA certificate's public key is not a valid ED25519 or ML-DSA87 key.
+/// * The certificate's signature is invalid or the signature field is empty.
+/// * The signature algorithm is not supported (not ED25519 or ML-DSA87).
+/// * An error occurs during OQS initialization or algorithm construction for ML-DSA87.
+/// * An error occurs when serializing the certificate to DER format for verification.
 pub fn validate_signing_certificate(
     pem: &str,
     ca_cert: Option<&Certificate>,
@@ -172,6 +183,12 @@ impl CertificateFields {
     /// The checks done are :
     ///     - Test if country is 2 letters long, if less return error, if more shorten it to the first two letters
     ///     - Test if validity can be converted to u32, if not generate error
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the country name is less than two characters long,
+    /// if the validity string cannot be parsed as a u32, or if the validity value is too
+    /// large and would cause an overflow.
     pub fn from_fields<'a>(
         org_name: Option<&'a str>,
         org_unit: Option<&'a str>,
@@ -206,6 +223,10 @@ impl CertificateFields {
     }
 
     /// Generate a distinghuished name from the input fields for the certificate
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if any of the certificate fields contain characters that are not valid for a `PrintableString`.
     pub fn generate_dn(&self) -> Result<RdnSequence, anyhow::Error> {
         let mut rdn: SetOfVec<AttributeTypeAndValue> = SetOfVec::new();
 
@@ -247,9 +268,19 @@ impl CertificateFields {
         Ok(rdn)
     }
 
-    /// Construct a information field for a certificate using the issuer CertificateInfos
+    /// Construct a information field for a certificate using the issuer `CertificateInfos`
     /// and the subject name and key
     /// The serial number is supplied by the caller that must ensure its uniqueness
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if:
+    /// * The `validity` field is not set.
+    /// * The issuer's distinguished name cannot be generated.
+    /// * The public key value cannot be converted to a `BitString`.
+    /// * Any of the certificate extensions cannot be created or encoded.
+    /// * The serial number cannot be generated.
+    /// * The validity period for the certificate cannot be generated.
     pub fn construct_tbs_certificate(
         &self,
         subject_name: &RdnSequence,

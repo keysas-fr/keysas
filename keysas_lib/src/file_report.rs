@@ -62,7 +62,7 @@ pub struct MetaData {
     pub file_type: String,
     /// True if the file is correct
     pub is_valid: bool,
-    /// Object containing the detailled [FileReport]
+    /// Object containing the detailled [`FileReport`]
     pub report: FileReport,
 }
 
@@ -72,7 +72,7 @@ pub struct MetaData {
 pub struct Bd {
     /// SHA256 digest of the file encoded in base64
     pub file_digest: String,
-    /// SHA256 digest of the [MetaData] associated to the file
+    /// SHA256 digest of the [`MetaData`] associated to the file
     pub metadata_digest: String,
     /// Station certificates: concatenation of its ED25519 and ML-DSA87 signing certificates with a '|' delimiter
     pub station_certificate: String,
@@ -84,7 +84,7 @@ pub struct Bd {
 /// The structure can be serialized to JSON.
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Report {
-    /// [MetaData] of the file analysis
+    /// [`MetaData`] of the file analysis
     pub metadata: MetaData,
     /// [Bd] binding of the file and the report with the station signature
     pub binding: Bd,
@@ -143,6 +143,7 @@ pub struct FileMetadata {
 /// # Arguments
 ///
 /// * `f` - File metadata received from keysas transit
+#[must_use] 
 pub fn generate_report_metadata(f: &FileMetadata) -> MetaData {
     let timestamp = format!(
         "{}-{}-{}_{}-{}-{}-{}",
@@ -189,6 +190,12 @@ pub fn generate_report_metadata(f: &FileMetadata) -> MetaData {
 /// * `report_meta` - Report metadata that will be included in the json file
 /// * `sign_keys` - Hybrid key pair to sign the report
 /// * `sign_cert` - Hybrid key pair certificate that will be included in the report
+///
+/// # Errors
+///
+/// This function will return an error if:
+/// * The report metadata cannot be serialized to a JSON string.
+/// * The signing process fails for either the ED25519 or ML-DSA87 key.
 pub fn bind_and_sign(
     f: &FileMetadata,
     report_meta: &MetaData,
@@ -243,6 +250,18 @@ pub fn bind_and_sign(
 /// * `file_path`   - Path to the file linked to the report
 /// * `ca_cert_cl`  - ED25519 certificate of the authority, used to validate the certificate in the report
 /// * `ca_cert_pq`  - ML-DSA87 certificate of the authority
+///
+/// # Errors
+///
+/// This function will return an error if:
+/// * The report file cannot be read or parsed as valid JSON into a `Report` structure.
+/// * The report is linked to a file, but no `file_path` is provided.
+/// * The report does not contain exactly two station certificates.
+/// * The certificates in the report are invalid or fail validation against the provided CA certificates.
+/// * The digest of the linked file or the report metadata does not match the digest in the report's binding.
+/// * The report signature is malformed, cannot be decoded, or is too short.
+/// * The signature verification fails for either the classic (ED25519) or post-quantum (ML-DSA87) part.
+/// * Any cryptographic operation (like public key extraction or OQS algorithm instantiation) fails.
 pub fn parse_report(
     report_path: &Path,
     file_path: Option<&Path>,
@@ -250,12 +269,9 @@ pub fn parse_report(
     ca_cert_pq: Option<&Certificate>,
 ) -> Result<Report, anyhow::Error> {
     // Open the report
-    let report_content = match std::fs::read_to_string(report_path) {
-        Ok(ct) => ct,
-        Err(_) => {
+    let Ok(report_content) = std::fs::read_to_string(report_path) else {
             return Err(anyhow!("Failed to read report content"));
-        }
-    };
+        };
 
     // Parse the json and coerce it into a Report structure
     let report: Report = serde_json::from_str(report_content.as_str())?;

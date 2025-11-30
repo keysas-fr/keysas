@@ -37,7 +37,7 @@ use std::fs;
 use std::fs::File;
 use std::io::Write;
 use std::path::Path;
-use x509_cert::certificate::*;
+use x509_cert::certificate::Certificate;
 use x509_cert::der::EncodePem;
 use x509_cert::der::asn1::BitString;
 use x509_cert::name::RdnSequence;
@@ -160,6 +160,13 @@ impl HybridKeyPair {
     /// The keys will be saved in DER encoded PKCS8 files at: keys_path/name-{cl|pq}.p8
     /// The certificates will be saved in PEM files at: certs_path/name-{cl|pq}.pem
     /// pwd is used for encrypting the PKCS8 files
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if:
+    /// * It fails to save either the classic or post-quantum private key. This could be due to issues with file creation, writing permissions, or the key encryption process.
+    /// * It fails to encode the certificates to the PEM format.
+    /// * It fails to create or write the certificate files to the specified path.
     pub fn save(
         &self,
         name: &str,
