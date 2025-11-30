@@ -108,7 +108,7 @@ fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
     Ok(())
 }
 
-fn init_yubikey() -> ()) {
+fn init_yubikey() -> () {
     let mut yubi = Yubico::new();
 
     if let Ok(device) = yubi.find_yubikey() {
