@@ -466,10 +466,7 @@ fn send_files(files: &Vec<FileData>, stream: &UnixStream) {
         let mut ancillary = SocketAncillary::new(&mut ancillary_buffer);
         ancillary.add_fds(&[file.fd][..]);
         match stream.send_vectored_with_ancillary(&bufs[..], &mut ancillary) {
-            Ok(_) => info!(
-                "File {} sent to Keysas-out.",
-                file.md.filename
-            ),
+            Ok(_) => info!("File {} sent to Keysas-out.", file.md.filename),
             Err(e) => error!("Failed to send file {e}."),
         }
         // Close the file descriptor
