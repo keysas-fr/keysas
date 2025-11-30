@@ -38,7 +38,7 @@ use kv::{Raw, Store};
 use std::fs::create_dir_all;
 use std::path::Path;
 
-fn store_key(name: &str, hex_string: &String) -> Result<bool> {
+fn store_key(name: &String, hex_string: &String) -> Result<bool> {
     // Configure the database
     if !Path::new("/etc/keysas/yubikey_db").is_dir() {
         create_dir_all("/etc/keysas/yubikey_db")?;
@@ -69,7 +69,7 @@ fn remove_key(hex_string: &String) -> Result<()> {
     Ok(())
 }
 
-fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
+fn manage_db(name: &String, enroll: bool, revoke: bool) -> Result<()> {
     let mut yubi = Yubico::new();
 
     if let Ok(device) = yubi.find_yubikey() {
