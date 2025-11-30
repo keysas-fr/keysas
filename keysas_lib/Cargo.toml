@@ -12,6 +12,8 @@ license = "GPL-3.0-only"
 repository = "https://github.com/keysas-fr/keysas"
 homepage = "https://keysas-fr.github.io/keysas/"
 keywords = ["security", "keysas", "fido", "pki"]
+readme = "README.md"
+categories = ["security", "command-line-utilities", "cryptography"]
 
 [dependencies]
 sha2 = "0.10"
