@@ -190,10 +190,8 @@ impl CertificateFields {
 
         // Test if validity can be converted to u32
         let val = validity.map(|value| value.parse::<u32>()).transpose()?;
-        if let Some(v) = val {
-            if v.checked_mul(86_400).is_none() {
-                return Err(anyhow!("Validity value is too large"));
-            }
+        if let Some(v) = val && if v.checked_mul(86_400).is_none() {
+            return Err(anyhow!("Validity value is too large"));
         }
 
         Ok(CertificateFields {
