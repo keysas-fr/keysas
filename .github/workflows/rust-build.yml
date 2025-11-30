@@ -23,6 +23,32 @@ jobs:
           toolchain: nightly
           components: clippy
 
+      - name: Install Ubuntu dependencies
+        run: |
+          sudo apt-get update -yq
+          sudo apt -y install \
+            build-essential \
+            curl \
+            wget \
+            libssl-dev \
+            libgtk-3-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            libyara-dev \
+            libyara10 \
+            make \
+            lsb-release \
+            software-properties-common \
+            libseccomp-dev \
+            pkg-config \
+            git \
+            bash \
+            libudev-dev \
+            cmake \
+            libsoup2.4-dev \
+            libjavascriptcoregtk-4.1-dev \
+            libwebkit2gtk-4.1-dev
+
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
