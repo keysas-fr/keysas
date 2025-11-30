@@ -35,7 +35,7 @@ jobs:
           libayatana-appindicator3-dev \
           librsvg2-dev \
           libyara-dev \
-          libyara9 \
+          libyara10 \
           make \
           lsb-release \
           software-properties-common \
@@ -46,8 +46,8 @@ jobs:
           libudev-dev \
           cmake \
           libsoup2.4-dev \
-          libjavascriptcoregtk-4.0-dev \
-          libwebkit2gtk-4.0-dev
+          libjavascriptcoregtk-4.1-dev \
+          libwebkit2gtk-4.1-dev
     - run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
     - name: Build
       run: cargo build --verbose
