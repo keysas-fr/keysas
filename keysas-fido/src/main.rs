@@ -93,7 +93,7 @@ fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
         let v: &[u8] = &hmac_result;
         let hex_string = hex::encode(v);
         if enroll && !revoke {
-            match store_key(name, &hex_string.clone()) {
+            match store_key(name, &hex_string) {
                 Ok(true) => println!("Enrollment sucessfull for user {name}: {hex_string}"),
                 Ok(false) => println!("Error: Yubikey already enrolled: {hex_string}"),
                 Err(why) => println!("Error: {why:?}"),
@@ -193,7 +193,7 @@ fn main() -> Result<()> {
 
     if init {
         init_yubikey();
-    } else if enroll | revoke {
+    } else if enroll || revoke {
         manage_db(name, enroll, revoke)?;
     } else {
         println!("Error: Try keysas-fido --help");
