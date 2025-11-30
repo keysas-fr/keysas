@@ -49,7 +49,7 @@ fn store_key(name: &str, hex_string: &String) -> Result<bool> {
     let store = Store::new(cfg)?;
     let enrolled_yubikeys = store.bucket::<String, String>(Some("Keysas"))?;
 
-    if if enrolled_yubikeys.get(hex_string)?.is_some() {
+    if enrolled_yubikeys.get(hex_string)?.is_some() {
         Ok(false)
     } else {
         enrolled_yubikeys.set(hex_string, &name.to_string())?;
