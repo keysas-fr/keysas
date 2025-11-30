@@ -36,7 +36,6 @@ use crate::errors::Result;
 use kv::Config as kvConfig;
 use kv::{Store, Raw};
 use std::fs::create_dir_all;
-use std::ops::Deref;
 use std::path::Path;
 
 fn store_key(name: &str, hex_string: &str) -> Result<bool> {
@@ -50,10 +49,10 @@ fn store_key(name: &str, hex_string: &str) -> Result<bool> {
     let store = Store::new(cfg)?;
     let enrolled_yubikeys = store.bucket::<String, String>(Some("Keysas"))?;
 
-    if let Some(_) = enrolled_yubikeys.get(&hex_string)? {
+    if let Some(_) = enrolled_yubikeys.get(hex_string)? {
         Ok(false)
     } else {
-         enrolled_yubikeys.set(&hex_string, &name)?;
+         enrolled_yubikeys.set(hex_string, name)?;
          Ok(true)
      }
 }
@@ -100,7 +99,7 @@ fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
                 Err(why) => println!("Error: {why:?}"),
             }
         } else if !enroll && revoke {
-            remove_key(hex_string)?;
+            remove_key(&hex_string)?;
         } else {
             println!("Error on revoke/enroll values !");
         }
@@ -193,7 +192,7 @@ fn main() -> Result<()> {
     let name = name.trim();
 
     if init {
-        init_yubikey()?;
+        init_yubikey();
     } else if enroll | revoke {
         manage_db(name, enroll, revoke)?;
     } else {
