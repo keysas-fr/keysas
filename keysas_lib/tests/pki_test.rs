@@ -245,13 +245,15 @@ fn test_generate_csr_mldsa() {
     let csr = keypair.generate_csr(&subject).unwrap();
 
     // Test the CSR signature
-    pq_scheme.verify(
-        &csr.info.to_der().unwrap(),
-        pq_scheme
-            .signature_from_bytes(csr.signature.as_bytes().unwrap())
-            .unwrap(),
-        &keypair.public_key,
-    ).unwrap();
+    pq_scheme
+        .verify(
+            &csr.info.to_der().unwrap(),
+            pq_scheme
+                .signature_from_bytes(csr.signature.as_bytes().unwrap())
+                .unwrap(),
+            &keypair.public_key,
+        )
+        .unwrap();
 
     // Test CSR signing algorithm
     let mldsa_oid = ObjectIdentifier::new("2.16.840.1.101.3.4.3.19").unwrap();
