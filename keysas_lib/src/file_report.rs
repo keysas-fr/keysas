@@ -143,7 +143,7 @@ pub struct FileMetadata {
 /// # Arguments
 ///
 /// * `f` - File metadata received from keysas transit
-#[must_use] 
+#[must_use]
 pub fn generate_report_metadata(f: &FileMetadata) -> MetaData {
     let timestamp = format!(
         "{}-{}-{}_{}-{}-{}-{}",
@@ -270,8 +270,8 @@ pub fn parse_report(
 ) -> Result<Report, anyhow::Error> {
     // Open the report
     let Ok(report_content) = std::fs::read_to_string(report_path) else {
-            return Err(anyhow!("Failed to read report content"));
-        };
+        return Err(anyhow!("Failed to read report content"));
+    };
 
     // Parse the json and coerce it into a Report structure
     let report: Report = serde_json::from_str(report_content.as_str())?;
