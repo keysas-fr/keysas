@@ -109,7 +109,6 @@ fn command_args(config: &mut Config) {
     if let Some(p) = matches.get_one::<String>("socket_in") {
         config.socket_in = p.to_string();
     }
-
 }
 
 fn is_corrupted(file: PathBuf) -> bool {

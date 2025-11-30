@@ -60,11 +60,11 @@
 #![feature(str_split_remainder)]
 
 use anyhow::Result;
-use clap::{crate_version, Arg, ArgAction, Command};
+use clap::{Arg, ArgAction, Command, crate_version};
 use keysas_lib::append_ext;
+use keysas_lib::file_report::FileMetadata;
 use keysas_lib::file_report::bind_and_sign;
 use keysas_lib::file_report::generate_report_metadata;
-use keysas_lib::file_report::FileMetadata;
 use keysas_lib::init_logger;
 use keysas_lib::keysas_hybrid_keypair::HybridKeyPair;
 use keysas_lib::sha256_digest;
@@ -175,7 +175,8 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
         .flatten()
         .filter_map(|fd| {
             // Deserialize metadata into a [FileMetadata] struct
-            match bincode::decode_from_slice::<FileMetadata, _>(buffer, bincode::config::standard()) {
+            match bincode::decode_from_slice::<FileMetadata, _>(buffer, bincode::config::standard())
+            {
                 Ok((meta, _)) => Some(FileData { fd, md: meta }),
                 Err(e) => {
                     warn!(
