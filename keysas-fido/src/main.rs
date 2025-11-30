@@ -54,7 +54,7 @@ fn store_key(name: &str, hex_string: &str) -> Result<bool> {
     } else {
          enrolled_yubikeys.set(hex_string, name)?;
          Ok(true)
-     }
+    }
 }
 
 fn remove_key(hex_string: &str) -> Result<()> {
