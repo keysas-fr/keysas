@@ -28,7 +28,7 @@ fn test_generate_signing_keypair() {
     };
 
     // Generate the key and get the resulting CSRs
-    let csrs = generate_signing_keypair(&config, &file_cl, &file_pq, "Test").unwrap();
+    let csrs = generate_signing_keypair(&config, file_cl, file_pq, "Test").unwrap();
     println!("CSR: {:?}", csrs);
 
     // Test the private keys by loading them
