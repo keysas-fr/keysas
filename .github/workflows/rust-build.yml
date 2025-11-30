@@ -8,9 +8,10 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  # Code Quality & Formatting
+  # Clippy linting
   # Fast execution. Fails immediately if standards are not met.
   check-quality:
+    name: Linting with Clippy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,12 +21,9 @@ jobs:
         uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
         with:
           toolchain: nightly
-          components: rustfmt, clippy, cargo
+          components: clippy
 
-      - name: Check Formatting
-        run: cargo fmt --all -- --check
-
-      - name: Run Clippy (Linting)
+      - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
 
@@ -98,5 +96,6 @@ jobs:
         with:
           toolchain: nightly
           components: rustfmt
+
       - name: Rustfmt Check
         uses: actions-rust-lang/rustfmt@559aa3035a47390ba96088dffa783b5d26da9326 # v1.1.1
