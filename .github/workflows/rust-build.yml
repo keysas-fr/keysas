@@ -1,27 +1,29 @@
-name: Rust
+name: Rust build and test
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-
+    
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         toolchain:
           - nightly
-        
+          - stable
 
     steps:
-    - uses: actions/checkout@v3
-    - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+    - name: Checkout code
+      uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+    - name: Set up Rust
+      uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
+      with:
+        toolchain: ${{ matrix.toolchain }}
+        components: clippy, rustfmt, cargo-audit
     - run: |
         sudo apt-get update -yq
         sudo apt -y install \
