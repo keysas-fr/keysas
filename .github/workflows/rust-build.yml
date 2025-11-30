@@ -8,18 +8,42 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  # Code Quality & Formatting
+  # Fast execution. Fails immediately if standards are not met.
+  check-quality:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
+        with:
+          toolchain: nightly
+          components: rustfmt, clippy, cargo
 
+      - name: Check Formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run Clippy (Linting)
+        # --all-targets checks tests and benches; --all-features ensures conditional code is checked
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+  build:
+    name: Build (debug) and audit
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+
     - name: Set up Rust
       uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
       with:
         toolchain: nightly
-        components: clippy, rustfmt, cargo
-    - run: |
+        components: cargo
+  
+    - name: Install Ubuntu dependencies
+      run: |
         sudo apt-get update -yq
         sudo apt -y install \
           build-essential \
@@ -43,10 +67,36 @@ jobs:
           libsoup2.4-dev \
           libjavascriptcoregtk-4.1-dev \
           libwebkit2gtk-4.1-dev
-    - run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-    - name: Build
-      run: cargo build --verbose
-    - name: Run audit
+
+    - name: Install LLVM from apt.llvm.org
+      run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+
+    - name: Build (verbose, all features)
+      run: cargo build --verbose --all-features
+
+    - name: Run tests
+      run: cargo test --verbose --all-features
+        
+    - name: Run docs tests
+      run: cargo test --doc
+
+    - name: Run Cargo audit
       run: |
         cargo install cargo-audit
         cargo audit
+
+  # Check formatting with rustfmt
+  formatting:
+    name: Formatting check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      # Ensure rustfmt is installed and setup problem matcher
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
+        with:
+          toolchain: nightly
+          components: rustfmt
+      - name: Rustfmt Check
+        uses: actions-rust-lang/rustfmt@559aa3035a47390ba96088dffa783b5d26da9326 # v1.1.1
