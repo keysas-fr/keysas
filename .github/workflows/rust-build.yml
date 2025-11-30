@@ -27,15 +27,8 @@ jobs:
         run: |
           sudo apt-get update -yq
           sudo apt -y install \
-            libayatana-appindicator3-dev \
-            librsvg2-dev \
             libyara-dev \
-            libyara10 \
-            libseccomp-dev \
-            libudev-dev \
-            libsoup2.4-dev \
-            libjavascriptcoregtk-4.1-dev \
-            libwebkit2gtk-4.1-dev
+            libyara10
 
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
