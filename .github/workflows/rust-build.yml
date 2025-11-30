@@ -28,8 +28,7 @@ jobs:
           sudo apt-get update -yq
           sudo apt -y install \
             libyara-dev \
-            libudev-dev \
-            libyara10
+            libudev-dev
 
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
