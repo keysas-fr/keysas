@@ -6,6 +6,11 @@
 name = "keysas-core"
 version = "2.7.0"
 edition = "2024"
+authors = ["Stephane Neveu", "Luc Bonnafoux"]
+description = "Core components for Keysas, a USB security gateway for file analysis and transfer."
+license = "GPL-3.0-only"
+repository = "https://github.com/keysas-fr/keysas"
+homepage = "https://keysas-fr.github.io/keysas/"
 
 [dependencies]
 anyhow = "1.0"
