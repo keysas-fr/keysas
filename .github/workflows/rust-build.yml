@@ -51,8 +51,7 @@ jobs:
 
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
-        # Add "-- -D warnings" to treat warnings as errors and fail the build on warnings
-        run: cargo clippy --all-targets --all-features
+        run: cargo clippy --all-targets --all-features -- -D warnings
 
   build:
     name: Build (debug) and audit
