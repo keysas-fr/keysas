@@ -23,7 +23,6 @@ use x509_cert::name::RdnSequence;
 use x509_cert::spki::ObjectIdentifier;
 
 #[cfg(test)]
-
 const PASSWORD: &[u8] = b"hunter42";
 
 #[test]
@@ -79,7 +78,7 @@ fn test_pkcs8_create_and_decrypt_der() {
 
     let pk_info = PrivateKeyInfo {
         algorithm: pkcs8::AlgorithmIdentifierRef {
-            oid: oid,
+            oid,
             parameters: None,
         },
         private_key: &keypair.to_bytes(),
@@ -147,7 +146,7 @@ fn test_pkcs8_create_and_decrypt_with_public_der() {
 
     let pk_info = PrivateKeyInfo {
         algorithm: pkcs8::AlgorithmIdentifierRef {
-            oid: oid,
+            oid,
             parameters: None,
         },
         private_key: &keypair.to_bytes(),
@@ -376,13 +375,12 @@ fn test_save_and_load_hybrid_signature() {
         loaded_hybrid_keypair.pq.private_key,
         hybrid_keypair.pq.private_key
     );
-    assert_eq!(
+    assert!(
         validate_signing_certificate(
             &hybrid_keypair.classic_cert.to_pem(LineEnding::LF).unwrap(),
             Some(&hybrid_keypair.classic_cert),
         )
-        .is_ok(),
-        true
+        .is_ok()
     );
 
     println!("Root signature is verified !\n");
@@ -394,7 +392,7 @@ fn test_save_and_load_hybrid_signature() {
     //    .save("test-app", &path, &path, &String::from("App"))
     //    .unwrap();
     println!("Now verifying application (usb/station) signature...\n");
-    assert_eq!(
+    assert!(
         validate_signing_certificate(
             &app_hybrid_keypair
                 .classic_cert
@@ -402,16 +400,14 @@ fn test_save_and_load_hybrid_signature() {
                 .unwrap(),
             Some(&hybrid_keypair.classic_cert),
         )
-        .is_ok(),
-        true
+        .is_ok()
     );
-    assert_eq!(
+    assert!(
         validate_signing_certificate(
             &app_hybrid_keypair.pq_cert.to_pem(LineEnding::LF).unwrap(),
             Some(&hybrid_keypair.pq_cert),
         )
-        .is_ok(),
-        true
+        .is_ok()
     );
     println!("Application signature is verified !\n");
 }

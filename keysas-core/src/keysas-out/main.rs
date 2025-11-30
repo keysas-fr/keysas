@@ -173,18 +173,16 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
             }
         })
         .flatten()
-        .filter_map(|fd| {
+        .map(|fd| {
             // Deserialize metadata into a [FileMetadata] struct
-            match bincode::decode_from_slice::<FileMetadata, _>(buffer, bincode::config::standard())
-            {
-                Ok((meta, _)) => Some(FileData { fd, md: meta }),
-                Err(e) => {
+            bincode::decode_from_slice::<FileMetadata, _>(buffer, bincode::config::standard())
+                .map(|(meta, _)| FileData { fd, md: meta })
+                .unwrap_or_else(|e| {
                     warn!(
                         "Failed to deserialize message from keysas-transit: {e}, killing myself."
                     );
                     process::exit(1);
-                }
-            }
+                })
         })
         .collect()
 }
