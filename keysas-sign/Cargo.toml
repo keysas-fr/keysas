@@ -6,6 +6,12 @@
 name = "keysas-sign"
 version = "2.7.0"
 edition = "2024"
+authors = ["Stephane Neveu", "Luc Bonnafoux"]
+description = "A command-line tool for Keysas signing operations."
+license = "GPL-3.0-only"
+repository = "https://github.com/keysas-fr/keysas"
+homepage = "https://keysas-fr.github.io/keysas/"
+keywords = ["security", "keysas", "cli", "sign"]
 
 [dependencies]
 clap = { version = "4", default-features = false, features = ["std", "cargo"] }

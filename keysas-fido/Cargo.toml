@@ -5,8 +5,12 @@
 name = "keysas-fido"
 version = "2.7.0"
 edition = "2024"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Stephane Neveu"]
+description = "A command-line tool for Keysas FIDO operations."
+license = "GPL-3.0-only"
+repository = "https://github.com/keysas-fr/keysas"
+homepage = "https://keysas-fr.github.io/keysas/"
+keywords = ["security", "keysas", "cli", "fido"]
 
 [dependencies]
 yubico_manager = { git = "https://github.com/r3dlight/yubico-manager"}

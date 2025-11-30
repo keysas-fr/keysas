@@ -6,6 +6,12 @@
 name = "keysas_lib"
 version = "2.7.0"
 edition = "2024"
+authors = ["Stephane Neveu", "Luc Bonnafoux"]
+description = "A library for Keysas, providing core functionalities."
+license = "GPL-3.0-only"
+repository = "https://github.com/keysas-fr/keysas"
+homepage = "https://keysas-fr.github.io/keysas/"
+keywords = ["security", "keysas", "fido", "pki"]
 
 [dependencies]
 sha2 = "0.10"

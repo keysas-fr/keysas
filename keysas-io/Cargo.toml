@@ -6,6 +6,12 @@
 name = "keysas-io"
 version = "2.7.0"
 edition = "2024"
+authors = ["Stephane Neveu", "Luc Bonnafoux"]
+license = "GPL-3.0-only"
+description = "Keysas I/O daemon for handling USB devices and file analysis."
+repository = "https://github.com/keysas-fr/keysas"
+homepage = "https://keysas-fr.github.io/keysas/"
+keywords = ["security", "usb", "file-analysis", "pki", "post-quantum"]
 
 [dependencies]
 tungstenite = "0.28"
