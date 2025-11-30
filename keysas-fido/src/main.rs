@@ -69,7 +69,7 @@ fn remove_key(hex_string: &String) -> Result<()> {
     Ok(())
 }
 
-fn manage_db(name: &String, enroll: bool, revoke: bool) -> Result<()> {
+fn manage_db(name: &str, enroll: bool, revoke: bool) -> Result<()> {
     let mut yubi = Yubico::new();
 
     if let Ok(device) = yubi.find_yubikey() {
