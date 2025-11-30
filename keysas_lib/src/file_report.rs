@@ -407,7 +407,7 @@ mod tests_out {
         // Validate fields
         assert_eq!(file_data.filename, meta.name);
         assert_eq!(file_data.file_type, meta.file_type);
-        assert_eq!(meta.is_valid, true);
+        assert!(meta.is_valid);
     }
 
     #[test]
@@ -505,8 +505,7 @@ mod tests_out {
         } else {
             panic!("Signature is not 64 bytes long!");
         }
-        assert_eq!(
-            true,
+        assert!(
             pub_cl
                 .verify_strict(
                     concat.as_bytes(),
@@ -515,8 +514,7 @@ mod tests_out {
                 .is_ok()
         );
 
-        assert_eq!(
-            true,
+        assert!(
             pq_scheme
                 .verify(
                     concat.as_bytes(),
