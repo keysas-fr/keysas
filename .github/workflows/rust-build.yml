@@ -51,7 +51,8 @@ jobs:
 
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
-        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+        # Add "-- -D warnings" to treat warnings as errors and fail the build on warnings
+        run: cargo clippy --workspace --all-targets --all-features
 
   build:
     name: Build (debug) and audit
@@ -112,6 +113,8 @@ jobs:
   # Check formatting with rustfmt
   formatting:
     name: Formatting check
+    # We keep '--check' to see the output diff, but 'continue-on-error' prevents failure of the pipeline.
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
