@@ -38,7 +38,7 @@ use kv::{Raw, Store};
 use std::fs::create_dir_all;
 use std::path::Path;
 
-fn store_key(name: &String, hex_string: &String) -> Result<bool> {
+fn store_key(name: &str, hex_string: &String) -> Result<bool> {
     // Configure the database
     if !Path::new("/etc/keysas/yubikey_db").is_dir() {
         create_dir_all("/etc/keysas/yubikey_db")?;
