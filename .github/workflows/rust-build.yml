@@ -99,7 +99,7 @@ jobs:
     - name: Build (verbose, all features)
       run: cargo build --verbose --all-features
 
-    - name: Run tests
+    - name: Run tests (verbose, all features)
       run: cargo test --verbose --all-features
 
     - name: Run Cargo audit
