@@ -25,14 +25,14 @@ jobs:
 
       - name: Install Ubuntu dependencies
         run: |
-          sudo apt-get update -yq
+          sudo apt update -yq
           sudo apt -y install \
             libyara-dev \
             libudev-dev
 
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
-        run: cargo clippy --all-targets --all-features -- -D warnings
+        run: cargo clippy --workspace --all-targets --all-features -- -W clippy::pedantic -W clippy::cargo
 
   build:
     name: Build (debug) and audit
@@ -96,6 +96,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+
       # Ensure rustfmt is installed and setup problem matcher
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
