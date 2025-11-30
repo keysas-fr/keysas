@@ -34,7 +34,7 @@ use yubico_manager::hmacmode::HmacKey;
 mod errors;
 use crate::errors::Result;
 use kv::Config as kvConfig;
-use kv::{Store, Raw};
+use kv::{Raw, Store};
 use std::fs::create_dir_all;
 use std::path::Path;
 
@@ -52,8 +52,8 @@ fn store_key(name: &String, hex_string: &String) -> Result<bool> {
     if let Some(_) = enrolled_yubikeys.get(hex_string)? {
         Ok(false)
     } else {
-         enrolled_yubikeys.set(hex_string, name)?;
-         Ok(true)
+        enrolled_yubikeys.set(hex_string, name)?;
+        Ok(true)
     }
 }
 
