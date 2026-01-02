@@ -9,10 +9,10 @@
 
 //! Keysas-sign is a utility on the station that manage its private keys
 //! It can be called on the command line and it offers the two functions
-//!  - generate_signing_keypair
+//!  - `generate_signing_keypair`
 //!    This command is used to generate a new signing keypair on the station that
 //!    will be used to signed outgoing files and reports
-//!  - save_certificate
+//!  - `save_certificate`
 //!    This command is used to load certificate on the station, it can be either:
 //!      - file: the certificate corresponds to the private signing key of the station
 //!      - usb: the certificate corresponds to the USB signing authority
@@ -129,14 +129,14 @@ fn command_args() -> Config {
     Config {
         generate: matches.get_flag("generate"),
         load: matches.get_flag("load"),
-        name: matches.get_one::<String>("name").unwrap().to_string(),
-        cert_type: matches.get_one::<String>("certtype").unwrap().to_string(),
-        cert: matches.get_one::<String>("cert").unwrap().to_string(),
+        name: matches.get_one::<String>("name").unwrap().clone(),
+        cert_type: matches.get_one::<String>("certtype").unwrap().clone(),
+        cert: matches.get_one::<String>("cert").unwrap().clone(),
     }
 }
 
 /// Generate a new key and certification request
-/// The private key is saved to a new file at privkey_path
+/// The private key is saved to a new file at '`privkey_path`'
 /// The certificate request is a PEM-encoded PKCS#10 structure
 fn generate_signing_keypair(
     config: &Config,
@@ -207,7 +207,7 @@ fn main() -> Result<()> {
         }
     } else if config.load {
         match save_certificate(&config.cert_type, &config.cert) {
-            Ok(_) => println!("OK"),
+            Ok(()) => println!("OK"),
             Err(e) => {
                 return Err(anyhow!("Failed to generate private key {e}"));
             }

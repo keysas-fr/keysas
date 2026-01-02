@@ -497,7 +497,7 @@ fn main() -> Result<()> {
     }
     // Seccomp initialization
     match sandbox::init() {
-        Ok(_) => log::info!("Seccomp sandbox activated."),
+        Ok(()) => log::info!("Seccomp sandbox activated."),
         Err(e) => log::warn!("Seccomp sandbox cannot be activated: {e}"),
     }
     // Initilize clamd client
@@ -528,9 +528,9 @@ fn main() -> Result<()> {
             }
         },
         Err(e) => {
-            error!("Cannot parse clamav configuration: {e:?}")
+            error!("Cannot parse clamav configuration: {e:?}");
         }
-    };
+    }
 
     // Initialize yara rules
     match Compiler::new() {
@@ -554,7 +554,7 @@ fn main() -> Result<()> {
             error!("Failed to initialize yara compiler {e}");
             process::exit(1);
         }
-    };
+    }
 
     // Open socket with keysas-in
     let addr_in = SocketAddr::from_abstract_name(&config.socket_in)?;

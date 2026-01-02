@@ -23,13 +23,13 @@ fn test_generate_signing_keypair() {
         generate: true,
         load: false,
         name: String::from("Keysas_station"),
-        cert_type: String::from(""),
-        cert: String::from(""),
+        cert_type: String::new(),
+        cert: String::new(),
     };
 
     // Generate the key and get the resulting CSRs
     let csrs = generate_signing_keypair(&config, file_cl, file_pq, "Test").unwrap();
-    println!("CSR: {:?}", csrs);
+    println!("CSR: {csrs:?}");
 
     // Test the private keys by loading them
     SigningKey::load_keys(&path_cl, "Test").unwrap();
