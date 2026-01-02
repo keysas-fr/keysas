@@ -5,7 +5,7 @@
 name = "keysas-backend"
 version = "2.7.0"
 edition = "2024"
-authors = ["Stephane Neveu <stephane.neveu@keysas.fr>"]
+authors = ["Stephane Neveu"]
 description = "Keysas backend service for handling USB device interactions and file analysis."
 license = "GPL-3.0-only"
 repository = "https://github.com/keysas-fr/keysas"
