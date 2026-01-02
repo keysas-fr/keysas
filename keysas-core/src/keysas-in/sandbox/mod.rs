@@ -2,7 +2,7 @@
 /*
  * The "keysas-in".
  *
- * (C) Copyright 2019-2025 Stephane Neveu
+ * (C) Copyright 2019-2026 Stephane Neveu
  *
  * This file contains various funtions
  * to sandbox this binary using seccomp.
@@ -94,14 +94,14 @@ pub fn landlock_sandbox(sas_in: &String) -> Result<()> {
     match status.ruleset {
         // The FullyEnforced case must be tested.
         RulesetStatus::FullyEnforced => {
-            log::info!("Keysas-in is now fully sandboxed using Landlock !")
+            log::info!("Keysas-in is now fully sandboxed using Landlock !");
         }
         RulesetStatus::PartiallyEnforced => {
-            log::warn!("Keysas-in is only partially sandboxed using Landlock !")
+            log::warn!("Keysas-in is only partially sandboxed using Landlock !");
         }
         // Users should be warned that they are not protected.
         RulesetStatus::NotEnforced => {
-            log::warn!("Keysas-in: Not sandboxed with Landlock ! Please update your kernel.")
+            log::warn!("Keysas-in: Not sandboxed with Landlock ! Please update your kernel.");
         }
     }
     Ok(())

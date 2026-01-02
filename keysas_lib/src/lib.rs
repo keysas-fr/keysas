@@ -64,7 +64,7 @@ pub fn sha256_digest(input: &File) -> Result<String> {
 
     let digest = {
         let mut hasher = Sha256::new();
-        let mut buffer = [0; 1_048_576];
+        let mut buffer = vec![0; 1_048_576].into_boxed_slice();
         loop {
             let count = reader.read(&mut buffer)?;
             if count == 0 {

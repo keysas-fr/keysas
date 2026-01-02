@@ -2,7 +2,7 @@
 /*
  * The "keysas-in".
  *
- * (C) Copyright 2019-2025 Stephane Neveu, Luc Bonnafoux
+ * (C) Copyright 2019-2026 Stephane Neveu, Luc Bonnafoux
  *
  * This file contains various funtions
  * for building the keysas-in binary.
@@ -104,10 +104,10 @@ fn command_args(config: &mut Config) {
 
     //Won't panic according to clap authors
     if let Some(p) = matches.get_one::<String>("sas_in") {
-        config.sas_in = p.to_string();
+        config.sas_in.clone_from(p);
     }
     if let Some(p) = matches.get_one::<String>("socket_in") {
-        config.socket_in = p.to_string();
+        config.socket_in.clone_from(p);
     }
 }
 
@@ -117,16 +117,15 @@ fn is_corrupted(file: PathBuf) -> bool {
             Some(ext) => {
                 if ext.eq("ioerror") {
                     warn!("Ioerror report detected.");
-                    let corrupted_filename = match file.file_stem() {
-                        Some(c) => c,
-                        None => return false,
+                    let Some(corrupted_filename) = file.file_stem() else {
+                        return false;
                     };
                     let mut path = match file.parent() {
                         Some(p) => p.to_path_buf(),
                         None => PathBuf::new(),
                     };
                     path.push(corrupted_filename);
-                    warn!("Corrupted file should be: {path:?}");
+                    warn!("Corrupted file should be: {}", path.display());
                     path.exists() && path.is_file()
                 } else {
                     let ioerror = append_ext("ioerror", file);
@@ -198,7 +197,7 @@ fn send_files(files: &[String], stream: &UnixStream, sas_in: &String) -> Result<
                 if m.is_corrupted {
                     let ioerror_report = append_ext("ioerror", f.clone());
                     match remove_file(&ioerror_report) {
-                        Ok(_) => warn!("Removing ioerror report: {ioerror_report:?}"),
+                        Ok(()) => warn!("Removing ioerror report: {}", ioerror_report.display()),
                         Err(e) => error!("Cannot remove ioerror report: {e}"),
                     }
                 }
@@ -228,9 +227,9 @@ fn send_files(files: &[String], stream: &UnixStream, sas_in: &String) -> Result<
         // Files are unlinked once fds are sent
         for (file_path, &fd) in fs.iter().zip(fds.iter()) {
             match unlinkat(Some(fd), file_path, UnlinkatFlags::NoRemoveDir) {
-                Ok(_) => info!("File {file_path:?} has been removed."),
-                Err(e) => error!("Cannot unlink file {file_path:?}: {e:?}"),
-            };
+                Ok(()) => info!("File {} has been removed.", file_path.display()),
+                Err(e) => error!("Cannot unlink file {}: {e:?}", file_path.display()),
+            }
         }
     }
     Ok(())
@@ -242,11 +241,11 @@ fn main() -> Result<()> {
     init_logger();
 
     match sandbox::landlock_sandbox(&config.sas_in) {
-        Ok(_) => log::info!("Landlock sandbox activated."),
+        Ok(()) => log::info!("Landlock sandbox activated."),
         Err(e) => log::warn!("Landlock sandbox cannot be activated: {e}"),
     }
     match sandbox::init() {
-        Ok(_) => log::info!("Seccomp sandbox activated."),
+        Ok(()) => log::info!("Seccomp sandbox activated."),
         Err(e) => log::warn!("Seccomp sandbox cannot be activated: {e}"),
     }
 
@@ -256,7 +255,7 @@ fn main() -> Result<()> {
     info!("- sas_in: {}", &config.sas_in);
     if Path::new(&config.socket_in).exists() {
         match remove_file(&config.socket_in) {
-            Ok(_) => debug!("Removing previously created socket_in"),
+            Ok(()) => debug!("Removing previously created socket_in"),
             Err(why) => {
                 error!("Cannot remove previously created socket_in: {why:?}");
                 process::exit(1);

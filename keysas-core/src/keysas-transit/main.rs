@@ -2,7 +2,7 @@
 /*
  * The "keysas-out".
  *
- * (C) Copyright 2019-2025 Stephane Neveu, Luc Bonnafoux
+ * (C) Copyright 2019-2026 Stephane Neveu, Luc Bonnafoux
  *
  * This file contains various funtions
  * for building the keysas-out binary.
@@ -46,7 +46,7 @@ use std::process;
 use std::str;
 use std::thread as main_thread;
 use std::time::Duration;
-use yara::*;
+use yara::{Compiler, Rules};
 mod sandbox;
 
 const CONFIG_DIRECTORY: &str = "/etc/keysas";
@@ -195,8 +195,8 @@ fn parse_args() -> Configuration {
 
     // Unwrap should not panic with default values
     Configuration {
-        socket_in: matches.get_one::<String>("socket_in").unwrap().to_string(),
-        socket_out: matches.get_one::<String>("socket_out").unwrap().to_string(),
+        socket_in: matches.get_one::<String>("socket_in").unwrap().clone(),
+        socket_out: matches.get_one::<String>("socket_out").unwrap().clone(),
         max_size: *matches.get_one::<u64>("max_size").unwrap(),
         magic_list: matches
             .get_one::<String>("allowed_formats")
@@ -204,9 +204,9 @@ fn parse_args() -> Configuration {
             .split(',')
             .map(String::from)
             .collect(),
-        clamav_ip: matches.get_one::<String>("clamavip").unwrap().to_string(),
+        clamav_ip: matches.get_one::<String>("clamavip").unwrap().clone(),
         clamav_port: *matches.get_one::<u16>("clamavport").unwrap(),
-        rule_path: matches.get_one::<String>("rules_path").unwrap().to_string(),
+        rule_path: matches.get_one::<String>("rules_path").unwrap().clone(),
         yara_timeout: *matches.get_one::<i32>("yara_timeout").unwrap(),
         yara_rules: None,
         type_off: matches.get_flag("type_off"),
@@ -280,7 +280,7 @@ fn check_is_extension_allowed(buf: &[u8], conf: &Configuration) -> bool {
 fn get_extension(buf: Vec<u8>) -> String {
     match get(&buf) {
         Some(info) => info.to_string(),
-        None => "".into(),
+        None => String::new(),
     }
 }
 /// This function check each file given in the input vector.
@@ -293,7 +293,7 @@ fn get_extension(buf: Vec<u8>) -> String {
 ///     - Yara rules check
 /// Checks results are marked in file metadata.
 /// This function does not modify the files.
-fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: String) {
+fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: &str) {
     for f in files {
         match unistd::dup2(f.fd, 500) {
             Ok(nfd) => {
@@ -301,7 +301,7 @@ fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: Strin
                 let mut file = unsafe { File::from_raw_fd(nfd) };
                 // Synchronize the file before calculating the SHA256 hash
                 match file.sync_all() {
-                    Ok(_) => (),
+                    Ok(()) => (),
                     Err(e) => {
                         error!("Failed to synchronize file: {e}");
                     }
@@ -355,7 +355,7 @@ fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: Strin
                     }
                 }
                 // Check anti-virus
-                match scan(clam_addr.clone(), &mut file, None) {
+                match scan(clam_addr.to_string(), &mut file, None) {
                     Ok(result) => {
                         f.md.av_pass = !result.is_infected;
                         f.md.av_report = result.detected_infections;
@@ -434,7 +434,7 @@ fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: Strin
                 error!("Cannot duplicate file descriptor for analysing: {e:?}, killing myself.");
                 process::exit(1);
             }
-        };
+        }
         log::info!(
             "Report for {}: digest_ok: {}, type_allowed: {}, yara_pass: {}, av_pass: {}, too_big: {}",
             f.md.filename,
@@ -471,7 +471,7 @@ fn send_files(files: &Vec<FileData>, stream: &UnixStream) {
         }
         // Close the file descriptor
         match unistd::close(file.fd) {
-            Ok(_) => info!(
+            Ok(()) => info!(
                 "File descriptor {} closed for file {}.",
                 file.fd, file.md.filename
             ),
@@ -492,7 +492,7 @@ fn main() -> Result<()> {
 
     // Landlock initialization
     match sandbox::landlock_sandbox(&config.rule_path) {
-        Ok(_) => log::info!("Landlock sandbox activated."),
+        Ok(()) => log::info!("Landlock sandbox activated."),
         Err(e) => log::warn!("Landlock sandbox cannot be activated: {e}"),
     }
     // Seccomp initialization
@@ -617,7 +617,7 @@ fn main() -> Result<()> {
         let mut files = parse_messages(ancillary_in.messages(), &buf_in);
 
         // Run check on message received
-        check_files(&mut files, &config, url.clone());
+        check_files(&mut files, &config, &url.clone());
 
         // Send fd and report to out
         send_files(&files, &out_stream);

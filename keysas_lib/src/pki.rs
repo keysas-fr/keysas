@@ -107,9 +107,9 @@ pub const ML_DSA87_OID: &str = "2.16.840.1.101.3.4.3.19";
 pub const ED25519_OID: &str = "1.3.101.112";
 
 /// Generate a X509 certificate from a CSR and a CA keypair
-/// 'is_app_cert' is set to true if it is an application certificate, otherwise it
+/// `is_app_cert` is set to true if it is an application certificate, otherwise it
 /// is considered to be a CA certificate
-/// The certificate generated will always be for 'DigitalSignature'
+/// The certificate generated will always be for `DigitalSignature`.
 pub fn generate_cert_from_csr(
     ca_keys: &HybridKeyPair,
     csr: &CertReq,

@@ -2,7 +2,7 @@
 /*
  * The "keysas-out".
  *
- * (C) Copyright 2019-2025 Stephane Neveu, Luc Bonnafoux
+ * (C) Copyright 2019-2026 Stephane Neveu, Luc Bonnafoux
  *
  * This file contains various funtions
  * for building the keysas-out binary.
@@ -153,8 +153,8 @@ fn parse_args() -> Configuration {
 
     // Unwrap should not panic with default values
     Configuration {
-        socket_out: matches.get_one::<String>("socket_out").unwrap().to_string(),
-        sas_out: matches.get_one::<String>("sas_out").unwrap().to_string(),
+        socket_out: matches.get_one::<String>("socket_out").unwrap().clone(),
+        sas_out: matches.get_one::<String>("sas_out").unwrap().clone(),
         yara_clean: matches.get_flag("yara_clean"),
     }
 }
@@ -277,12 +277,12 @@ fn main() -> Result<()> {
 
     //Init Landlock
     match sandbox::landlock_sandbox(&config.sas_out) {
-        Ok(_) => log::info!("Landlock sandbox activated."),
+        Ok(()) => log::info!("Landlock sandbox activated."),
         Err(e) => log::warn!("Landlock sandbox cannot be activated: {e}"),
     }
     // Init Seccomp filters
     match sandbox::init() {
-        Ok(_) => log::info!("Seccomp sandbox activated."),
+        Ok(()) => log::info!("Seccomp sandbox activated."),
         Err(e) => log::warn!("Seccomp sandbox cannot be activated: {e}"),
     }
 
