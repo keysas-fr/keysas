@@ -381,7 +381,7 @@ pub fn parse_report(
         .signature_from_bytes(&signature[ed25519_dalek::SIGNATURE_LENGTH..])
         .ok_or_else(|| anyhow!("Failed to parse signature field"))?;
     match pq_scheme.verify(message.as_bytes(), sig_pq, pub_pq) {
-        Ok(_) => log::info!("ML-DSA87 scheme is now verified"),
+        Ok(()) => log::info!("ML-DSA87 scheme is now verified"),
         Err(e) => return Err(anyhow!("ML-DSA87 scheme is not verified: {e}")),
     }
     // If the signature is invalid an error is thrown

@@ -44,7 +44,7 @@ use std::fs;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
-use x509_cert::certificate::*;
+use x509_cert::certificate::Certificate;
 use x509_cert::der::Encode;
 use x509_cert::der::asn1::BitString;
 use x509_cert::name::RdnSequence;
@@ -158,9 +158,9 @@ impl PublicKeys<KeysasHybridPubKeys> for KeysasHybridPubKeys {
             Err(e) => return Err(anyhow!("Cannot construct new ML-DSA87 algorithm: {e}")),
         };
         match pq_scheme.verify(message, &signatures.pq, &pubkeys.pq) {
-            Ok(_) => log::info!("ML-DSA87 scheme is verified"),
+            Ok(()) => log::info!("ML-DSA87 scheme is verified"),
             Err(e) => return Err(anyhow!("ML-DSA87 scheme is not verified: {e}")),
-        };
+        }
         // If no error has been returned then the signature is valid
         Ok(())
     }
@@ -340,7 +340,7 @@ impl KeysasKey<SigningKey> for SigningKey {
     fn message_verify(&self, message: &[u8], signature: &[u8]) -> Result<bool, anyhow::Error> {
         let mut signature_casted: [u8; 64] = [0u8; 64];
         if signature.len() == 64 {
-            signature_casted.copy_from_slice(signature)
+            signature_casted.copy_from_slice(signature);
         } else {
             return Err(anyhow!("Signature is not 64 bytes long"));
         }
@@ -550,7 +550,7 @@ impl KeysasKey<KeysasPQKey> for KeysasPQKey {
             }
         };
         match pq_scheme.verify(message, sig, &self.public_key) {
-            Ok(_) => log::info!("ML-DSA87 scheme verified"),
+            Ok(()) => log::info!("ML-DSA87 scheme verified"),
             Err(e) => return Err(anyhow!("ML-DSA87 scheme not verified: {e}")),
         }
         // If no error then the signature is valid
