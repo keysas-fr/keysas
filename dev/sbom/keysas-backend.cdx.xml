@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:b949382d-0ccb-4b97-99de-b68d484d0742" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:71d09481-12c2-409f-a5d3-e2f84673bcf9" version="1">
   <metadata>
-    <timestamp>2026-01-02T08:31:52.203984684Z</timestamp>
+    <timestamp>2026-01-02T09:29:17.982665627Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -13,11 +13,10 @@
     <authors>
       <author>
         <name>Stephane Neveu</name>
-        <email>stephane.neveu@keysas.fr</email>
       </author>
     </authors>
     <component type="application" bom-ref="path+file:///home/runner/work/keysas/keysas/keysas-backend#2.7.0">
-      <author>Stephane Neveu &lt;stephane.neveu@keysas.fr&gt;</author>
+      <author>Stephane Neveu</author>
       <name>keysas-backend</name>
       <version>2.7.0</version>
       <description>Keysas backend service for handling USB device interactions and file analysis.</description>
