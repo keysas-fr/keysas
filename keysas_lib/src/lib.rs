@@ -97,6 +97,10 @@ pub fn sha256_digest(input: &File) -> Result<String> {
 /// let files = list_files(path.to_str().unwrap());
 /// assert_eq!(files.unwrap(), ["file.txt"]);
 /// ```
+/// # Errors
+///
+/// Will return `Err` if `directory` does not exist or the user does not have
+/// permission to read it.
 pub fn list_files(directory: &str) -> Result<Vec<String>> {
     let paths: std::fs::ReadDir = fs::read_dir(directory)?;
 
@@ -118,6 +122,7 @@ pub fn list_files(directory: &str) -> Result<Vec<String>> {
     Ok(names)
 }
 
+#[must_use]
 #[cfg(target_os = "linux")]
 pub fn convert_ioslice<'a>(
     files: &'a Vec<File>,
