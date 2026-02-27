@@ -160,7 +160,7 @@ pub fn validate_signing_certificate(
                     )
                     .ok_or_else(|| anyhow!("Failed to parse pq signature field"))?;
                 match pq_scheme.verify(&cert.tbs_certificate.to_der()?, sig, ca_key) {
-                    Ok(_) => log::info!("Certificate is verified"),
+                    Ok(()) => log::info!("Certificate is verified"),
                     Err(e) => return Err(anyhow!("Certificate is not verified: {e:?}")),
                 }
                 // If the signature is invalid an error is thrown
