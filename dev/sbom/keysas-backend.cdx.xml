@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="cyclonedx-to-html.xsl"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:de498796-155c-4bb2-9cf0-7f47d84b5db0" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:2a405866-42e3-4f21-9de5-bd9d6500a45c" version="1">
   <metadata>
-    <timestamp>2026-02-27T10:10:17.198237453Z</timestamp>
+    <timestamp>2026-03-10T08:58:02.497582392Z</timestamp>
     <tools>
       <tool>
         <vendor>CycloneDX</vendor>
@@ -482,19 +482,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.180">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.183">
       <author>The Rust Project Developers</author>
       <name>libc</name>
-      <version>0.2.180</version>
+      <version>0.2.183</version>
       <description>Raw FFI bindings to platform libraries like libc.</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">bcc35a38544a891a5f7c865aca548a982ccb3b8650a5b06d0fd33a10283c56fc</hash>
+        <hash alg="SHA-256">b5b646652bf6661599e1da8901b3b9522896f01e736bad5f723fe7a3a27f899d</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/libc@0.2.180</purl>
+      <purl>pkg:cargo/libc@0.2.183</purl>
       <externalReferences>
         <reference type="vcs">
           <url>https://github.com/rust-lang/libc</url>
@@ -649,19 +649,19 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45">
       <author>David Tolnay &lt;dtolnay@gmail.com&gt;</author>
       <name>quote</name>
-      <version>1.0.44</version>
+      <version>1.0.45</version>
       <description>Quasi-quoting macro quote!(...)</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">21b2ebcf727b7760c461f091f9f0f539b77b8e87f2fd88131e7f1b433b3cece4</hash>
+        <hash alg="SHA-256">41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924</hash>
       </hashes>
       <licenses>
         <expression>MIT OR Apache-2.0</expression>
       </licenses>
-      <purl>pkg:cargo/quote@1.0.44</purl>
+      <purl>pkg:cargo/quote@1.0.45</purl>
       <externalReferences>
         <reference type="documentation">
           <url>https://docs.rs/quote/</url>
@@ -1138,38 +1138,38 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy-derive@0.8.40">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy-derive@0.8.42">
       <author>Joshua Liebow-Feeser &lt;joshlf@google.com&gt;, Jack Wrenn &lt;jswrenn@amazon.com&gt;</author>
       <name>zerocopy-derive</name>
-      <version>0.8.40</version>
+      <version>0.8.42</version>
       <description>Custom derive for traits from the zerocopy crate</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">f65c489a7071a749c849713807783f70672b28094011623e200cb86dcb835953</hash>
+        <hash alg="SHA-256">7e6cc098ea4d3bd6246687de65af3f920c430e236bee1e3bf2e441463f08a02f</hash>
       </hashes>
       <licenses>
         <expression>BSD-2-Clause OR Apache-2.0 OR MIT</expression>
       </licenses>
-      <purl>pkg:cargo/zerocopy-derive@0.8.40</purl>
+      <purl>pkg:cargo/zerocopy-derive@0.8.42</purl>
       <externalReferences>
         <reference type="vcs">
           <url>https://github.com/google/zerocopy</url>
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy@0.8.40">
+    <component type="library" bom-ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy@0.8.42">
       <author>Joshua Liebow-Feeser &lt;joshlf@google.com&gt;, Jack Wrenn &lt;jswrenn@amazon.com&gt;</author>
       <name>zerocopy</name>
-      <version>0.8.40</version>
+      <version>0.8.42</version>
       <description>Zerocopy makes zero-cost memory manipulation effortless. We write "unsafe" so you don't have to.</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="SHA-256">a789c6e490b576db9f7e6b6d661bcc9799f7c0ac8352f56ea20193b2681532e5</hash>
+        <hash alg="SHA-256">f2578b716f8a7a858b7f02d5bd870c14bf4ddbbcf3a4c05414ba6503640505e3</hash>
       </hashes>
       <licenses>
         <expression>BSD-2-Clause OR Apache-2.0 OR MIT</expression>
       </licenses>
-      <purl>pkg:cargo/zerocopy@0.8.40</purl>
+      <purl>pkg:cargo/zerocopy@0.8.42</purl>
       <externalReferences>
         <reference type="vcs">
           <url>https://github.com/google/zerocopy</url>
@@ -1204,7 +1204,7 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#anyhow@1.0.102" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#http@1.4.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#landlock@0.4.4" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.180" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.183" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#log@0.4.29" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#nix@0.30.1" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#nom@8.0.0" />
@@ -1242,7 +1242,7 @@
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#enumflags2_derive@0.7.12">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.117" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#generic-array@0.14.7">
@@ -1251,7 +1251,7 @@
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#getrandom@0.3.4">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cfg-if@1.0.4" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.180" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.183" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#http@1.4.0">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#bytes@1.11.1" />
@@ -1261,10 +1261,10 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.17" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#landlock@0.4.4">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#enumflags2@0.7.12" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.180" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.183" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#thiserror@2.0.18" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.180" />
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.183" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#log@0.4.29" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.0" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memoffset@0.9.1">
@@ -1274,19 +1274,19 @@
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#bitflags@2.11.0" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cfg-if@1.0.4" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#cfg_aliases@0.2.1" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.180" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#libc@0.2.183" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memoffset@0.9.1" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#nom@8.0.0">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.0" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#ppv-lite86@0.2.21">
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy@0.8.40" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy@0.8.42" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#rand@0.9.2">
@@ -1319,7 +1319,7 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.228" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.228">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.117" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.149">
@@ -1336,12 +1336,12 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#subtle@2.6.1" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.117">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#thiserror-impl@2.0.18">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.117" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#thiserror@2.0.18">
@@ -1362,13 +1362,13 @@
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#utf-8@0.7.6" />
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#version_check@0.9.5" />
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy-derive@0.8.40">
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy-derive@0.8.42">
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.106" />
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.44" />
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#quote@1.0.45" />
       <dependency ref="registry+https://github.com/rust-lang/crates.io-index#syn@2.0.117" />
     </dependency>
-    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy@0.8.40">
-      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy-derive@0.8.40" />
+    <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy@0.8.42">
+      <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zerocopy-derive@0.8.42" />
     </dependency>
     <dependency ref="registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.21" />
   </dependencies>
