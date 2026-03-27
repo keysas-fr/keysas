@@ -108,7 +108,7 @@ pub struct FileReport {
 }
 
 /// Structure that holds a file metadata
-#[derive(Debug, Serialize, Deserialize, Clone, bincode::Decode)]
+#[derive(Debug, Serialize, Deserialize, Clone, rkyv::Archive, rkyv::Deserialize)]
 pub struct FileMetadata {
     /// Name of the file
     pub filename: String,

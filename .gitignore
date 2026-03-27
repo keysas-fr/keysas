@@ -54,3 +54,4 @@ keysas-usbfilter/minifilter/smvstats.txt
 keysas-usbfilter/tray-app/package-lock.json
 keysas-firewall/install/Output/
 keysas-firewall/installer/=/*
+.cargo/
