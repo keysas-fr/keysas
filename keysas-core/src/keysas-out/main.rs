@@ -85,7 +85,7 @@ use std::str;
 mod sandbox;
 
 /// Structure representing a file and its metadata in the daemon
-#[derive(bincode::Decode, Debug)]
+#[derive(Debug)]
 pub struct FileData {
     /// File descriptor
     fd: i32,
@@ -175,8 +175,8 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
         .flatten()
         .map(|fd| {
             // Deserialize metadata into a [FileMetadata] struct
-            bincode::decode_from_slice::<FileMetadata, _>(buffer, bincode::config::standard())
-                .map(|(meta, _)| FileData { fd, md: meta })
+            rkyv::from_bytes::<FileMetadata, rkyv::rancor::Error>(buffer)
+                .map(|meta| FileData { fd, md: meta })
                 .unwrap_or_else(|e| {
                     warn!(
                         "Failed to deserialize message from keysas-transit: {e}, killing myself."
@@ -350,16 +350,16 @@ fn main() -> Result<()> {
         let bufs_in = &mut [IoSliceMut::new(&mut buf_in[..])][..];
 
         // Listen for message on socket
-        match sock_out.recv_vectored_with_ancillary(bufs_in, &mut ancillary_in) {
-            Ok(_) => (),
+        let recv_size = match sock_out.recv_vectored_with_ancillary(bufs_in, &mut ancillary_in) {
+            Ok(size) => size,
             Err(e) => {
                 warn!("Failed to receive fds from in: {e}");
                 process::exit(1);
             }
-        }
+        };
 
         // Parse messages received
-        let files = parse_messages(ancillary_in.messages(), &buf_in);
+        let files = parse_messages(ancillary_in.messages(), &buf_in[..recv_size]);
 
         // Output file
         output_files(files, &config, sign_keys.as_ref(), &sign_cert)?;

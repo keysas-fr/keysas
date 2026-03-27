@@ -48,7 +48,7 @@ use keysas_lib::{convert_ioslice, init_logger, list_files, sha256_digest};
 
 const CONFIG_DIRECTORY: &str = "/etc/keysas";
 
-#[derive(bincode::Encode, Debug, Clone)]
+#[derive(rkyv::Archive, rkyv::Serialize, Debug, Clone)]
 struct FileMetadata {
     filename: String,
     digest: String,
@@ -201,11 +201,10 @@ fn send_files(files: &[String], stream: &UnixStream, sas_in: &String) -> Result<
                         Err(e) => error!("Cannot remove ioerror report: {e}"),
                     }
                 }
-                let config = bincode::config::standard();
-                let data: Vec<u8> = match bincode::encode_to_vec(&m, config) {
-                    Ok(d) => d,
+                let data = match rkyv::to_bytes::<rkyv::rancor::Error>(&m) {
+                    Ok(d) => d.into_vec(),
                     Err(_e) => {
-                        error!("Failed to serialize FileMetadataa");
+                        error!("Failed to serialize FileMetadata");
                         return None;
                     }
                 };

@@ -51,7 +51,7 @@ mod sandbox;
 
 const CONFIG_DIRECTORY: &str = "/etc/keysas";
 
-#[derive(bincode::Decode, Debug)]
+#[derive(rkyv::Archive, rkyv::Deserialize, Debug)]
 struct InputMetadata {
     filename: String,
     digest: String,
@@ -59,7 +59,7 @@ struct InputMetadata {
     is_corrupted: bool,
 }
 
-#[derive(bincode::Encode, Debug)]
+#[derive(rkyv::Archive, rkyv::Serialize, Debug)]
 struct FileMetadata {
     filename: String,
     digest: String,
@@ -236,16 +236,15 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
         .flatten()
         .filter_map(|fd| {
             // Deserialize metadata
-            let config = bincode::config::standard().with_limit::<4128>();
-            match bincode::decode_from_slice::<InputMetadata, _>(buffer, config) {
+            match rkyv::from_bytes::<InputMetadata, rkyv::rancor::Error>(buffer) {
                 Ok(meta) => {
                     // Initialize with failed value by default
-                    log::info!("Receiving fd of file: {}", &meta.0.filename);
+                    log::info!("Receiving fd of file: {}", &meta.filename);
                     Some(FileData {
                         fd,
                         md: FileMetadata {
-                            filename: meta.0.filename,
-                            digest: meta.0.digest,
+                            filename: meta.filename,
+                            digest: meta.digest,
                             is_digest_ok: false,
                             is_toobig: true,
                             size: 0,
@@ -254,8 +253,8 @@ fn parse_messages(messages: Messages, buffer: &[u8]) -> Vec<FileData> {
                             av_report: Vec::new(),
                             yara_pass: false,
                             yara_report: String::new(),
-                            timestamp: meta.0.timestamp,
-                            is_corrupted: meta.0.is_corrupted,
+                            timestamp: meta.timestamp,
+                            is_corrupted: meta.is_corrupted,
                             file_type: "Unknown".into(),
                         },
                     })
@@ -449,10 +448,9 @@ fn check_files(files: &mut Vec<FileData>, conf: &Configuration, clam_addr: &str)
 
 /// This functions send the files filedescriptor and metadata to the socket
 fn send_files(files: &Vec<FileData>, stream: &UnixStream) {
-    let config = bincode::config::standard();
     for file in files {
         // Get metadata
-        let data = match bincode::encode_to_vec(&file.md, config) {
+        let data = match rkyv::to_bytes::<rkyv::rancor::Error>(&file.md) {
             Ok(d) => d,
             Err(e) => {
                 error!("Failed to serialize: {e}");
@@ -605,16 +603,19 @@ fn main() -> Result<()> {
         let bufs_in = &mut [IoSliceMut::new(&mut buf_in[..])][..];
 
         // Listen for message on socket
-        match sock_in.recv_vectored_with_ancillary(bufs_in, &mut ancillary_in) {
-            Ok(size) => info!("Receiving data from keysas-in, message size: {size}"),
+        let recv_size = match sock_in.recv_vectored_with_ancillary(bufs_in, &mut ancillary_in) {
+            Ok(size) => {
+                info!("Receiving data from keysas-in, message size: {size}");
+                size
+            }
             Err(e) => {
                 warn!("Failed to receive fds from in: {e}");
                 process::exit(1);
             }
-        }
+        };
 
         // Parse messages received
-        let mut files = parse_messages(ancillary_in.messages(), &buf_in);
+        let mut files = parse_messages(ancillary_in.messages(), &buf_in[..recv_size]);
 
         // Run check on message received
         check_files(&mut files, &config, &url.clone());
