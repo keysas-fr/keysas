@@ -57,7 +57,6 @@
 #![warn(deprecated)]
 #![warn(unused_imports)]
 #![warn(missing_docs)]
-#![feature(str_split_remainder)]
 
 use anyhow::Result;
 use clap::{Arg, ArgAction, Command, crate_version};

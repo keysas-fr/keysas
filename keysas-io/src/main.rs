@@ -7,7 +7,6 @@
  * This file is the main file for udev management.
  */
 
-#![feature(atomic_from_mut)]
 #![feature(str_split_remainder)]
 #![feature(random)]
 
