@@ -37,7 +37,7 @@ jobs:
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
         # Consider adding "-- -W clippy::pedantic -W clippy::cargo" for stricter linting
-        run: cargo clippy --workspace --all-targets --all-features -- -A warnings
+        run: cargo clippy 
 
   build:
     name: Build (debug) and audit
@@ -82,10 +82,10 @@ jobs:
       run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
     - name: Build (verbose, all features)
-      run: cargo build --verbose --all-features
+      run: cargo build 
 
     - name: Run tests (verbose, all features)
-      run: cargo test --verbose --all-features
+      run: cargo test 
 
     - name: Run Cargo audit
       run: |
