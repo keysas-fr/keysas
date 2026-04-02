@@ -30,6 +30,7 @@
 #![warn(overflowing_literals)]
 #![warn(deprecated)]
 #![warn(unused_imports)]
+#![cfg_attr(test, feature(str_split_remainder))]
 
 pub use anyhow::{Context, Result, anyhow};
 use clap::{Arg, ArgAction, Command, crate_version};
