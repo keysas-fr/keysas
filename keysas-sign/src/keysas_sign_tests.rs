@@ -1,3 +1,4 @@
+#![feature(str_split_remainder)]
 use ed25519_dalek::SigningKey;
 use keysas_lib::keysas_key::KeysasKey;
 use keysas_lib::keysas_key::KeysasPQKey;
