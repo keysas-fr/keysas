@@ -37,7 +37,7 @@ jobs:
       - name: Run Clippy
         # --all-targets checks tests and benches; --all-features ensures conditional code is checked
         # Consider adding "-- -W clippy::pedantic -W clippy::cargo" for stricter linting
-        run: cargo clippy 
+        run: cargo clippy -- -A warnings
 
   build:
     name: Build (debug) and audit
