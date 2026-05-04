@@ -28,7 +28,8 @@ log = "0.4"
 tauri = { version = "2.3.1", features = [] }
 tauri-plugin-log = "2"
 # App dependencies
-ssh-rs = { version = "0.5", features = ["scp"] }
+russh = "0.60"
+tokio = { version = "1", features = ["fs", "io-util"] }
 anyhow = { version = "1.0", features = ["backtrace"] }
 sqlite = "0.37"
 pkcs8 = {version = "0.10", features = ["encryption", "pem"] }
