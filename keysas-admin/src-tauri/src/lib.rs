@@ -318,7 +318,7 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
     };
 
     // Connect to the host
-    let mut session = match connect_key(&ip, &ssh_key) {
+    let mut session = match connect_key(&ip, &ssh_key).await {
         Ok(tu) => tu,
         Err(e) => {
             log::error!("Failed to open ssh connection with station: {e}");
@@ -328,11 +328,11 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
 
     //  1. Generate a key pair for file signature on the station
     //  2. Recover the CSR for the keys
-    let (csr_cl, csr_pq) = match cmd_generate_key_and_get_csr(&mut session, &name) {
+    let (csr_cl, csr_pq) = match cmd_generate_key_and_get_csr(&mut session, &name).await {
         Ok(csrs) => csrs,
         Err(e) => {
             log::error!("Failed to generate key on station and get CSR: {e}");
-            session.close();
+            session.close().await;
             return Err(String::from("PKI error"));
         }
     };
@@ -349,7 +349,7 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
         Ok(k) => k,
         Err(e) => {
             log::error!("Failed to load station CA key: {e}");
-            session.close();
+            session.close().await;
             return Err(String::from("PKI error"));
         }
     };
@@ -365,7 +365,7 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
         Ok(k) => k,
         Err(e) => {
             log::error!("Failed to load station USB key: {e}");
-            session.close();
+            session.close().await;
             return Err(String::from("PKI error"));
         }
     };
@@ -375,7 +375,7 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
         Ok(c) => c,
         Err(e) => {
             log::error!("Failed to generate certificate from request: {e}");
-            session.close();
+            session.close().await;
             return Err(String::from("PKI error"));
         }
     };
@@ -384,7 +384,7 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
         Ok(c) => c,
         Err(e) => {
             log::error!("Failed to generate certificate from request: {e}");
-            session.close();
+            session.close().await;
             return Err(String::from("PKI error"));
         }
     };
@@ -394,7 +394,7 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
     log::debug!("path_cl ST-PEM: {path_cl}");
     if let Err(e) = save_certificate(&cert_cl, Path::new(&path_cl)) {
         log::error!("Failed to save station certificate: {e}");
-        session.close();
+        session.close().await;
         return Err(String::from("PKI error"));
     }
 
@@ -403,37 +403,37 @@ async fn init_keysas(ip: String, name: String, ca_pwd: String) -> Result<String,
 
     if let Err(e) = save_certificate(&cert_cl, Path::new(&path_pq)) {
         log::error!("Failed to save station certificate: {e}");
-        session.close();
+        session.close().await;
         return Err(String::from("PKI error"));
     }
 
     // 4. Export the created certificates on the station
-    if let Err(e) = send_cert_to_station(&mut session, &cert_cl, "file-cl") {
+    if let Err(e) = send_cert_to_station(&mut session, &cert_cl, "file-cl").await {
         log::error!("Failed to load certificate on the station: {e}");
-        session.close();
+        session.close().await;
         return Err(String::from("Connection error"));
     }
 
-    if let Err(e) = send_cert_to_station(&mut session, &cert_pq, "file-pq") {
+    if let Err(e) = send_cert_to_station(&mut session, &cert_pq, "file-pq").await {
         log::error!("Failed to load certificate on the station: {e}");
-        session.close();
+        session.close().await;
         return Err(String::from("Connection error"));
     }
 
     // 5. Finally it loads the admin USB signing certificate
-    if let Err(e) = send_cert_to_station(&mut session, &usb_keys.classic_cert, "usb-cl") {
+    if let Err(e) = send_cert_to_station(&mut session, &usb_keys.classic_cert, "usb-cl").await {
         log::error!("Failed to load certificate on the station: {e}");
-        session.close();
+        session.close().await;
         return Err(String::from("Connection error"));
     }
 
-    if let Err(e) = send_cert_to_station(&mut session, &usb_keys.pq_cert, "usb-pq") {
+    if let Err(e) = send_cert_to_station(&mut session, &usb_keys.pq_cert, "usb-pq").await {
         log::error!("Failed to load certificate on the station: {e}");
-        session.close();
+        session.close().await;
         return Err(String::from("Connection error"));
     }
 
-    session.close();
+    session.close().await;
 
     Ok(String::from("true"))
 }
@@ -453,7 +453,7 @@ async fn update(ip: String) -> bool {
     log::error!("Rust will try updating host: {host}");
 
     // Connect to the host
-    let mut session = match connect_key(&ip, &private_key) {
+    let mut session = match connect_key(&ip, &private_key).await {
         Ok(s) => s,
         Err(e) => {
             log::error!("Failed to open ssh connection with station: {e}");
@@ -466,17 +466,19 @@ async fn update(ip: String) -> bool {
         &String::from(
             "sudo /usr/bin/apt update && sudo /usr/bin/apt -y dist-upgrade && sudo /bin/systemctl reboot ",
         ),
-    ) {
+    )
+    .await
+    {
         Ok(_) => {
             log::info!("Trying to update and rebooting...");
         }
         Err(why) => {
             log::error!("Error while updating: {why:?}");
-            session.close();
+            session.close().await;
             return false;
         }
     }
-    session.close();
+    session.close().await;
     true
 }
 
@@ -493,7 +495,7 @@ async fn reboot(ip: String) -> bool {
     // Connect to the host
     let host = format!("{}{}", ip.trim(), ":22");
     log::info!("Rust will try rebooting host: {host}");
-    let mut session = match connect_key(&ip, &private_key) {
+    let mut session = match connect_key(&ip, &private_key).await {
         Ok(s) => s,
         Err(e) => {
             log::error!("Failed to open ssh connection with station: {e}");
@@ -501,17 +503,17 @@ async fn reboot(ip: String) -> bool {
         }
     };
 
-    match session_exec(&mut session, &String::from("sudo /bin/systemctl reboot")) {
+    match session_exec(&mut session, &String::from("sudo /bin/systemctl reboot")).await {
         Ok(_) => {
             log::info!("Keysas station is rebooting !");
         }
         Err(why) => {
             log::error!("Rust error on open_exec: {why:?}");
-            session.close();
+            session.close().await;
             return false;
         }
     }
-    session.close();
+    session.close().await;
     true
 }
 
@@ -526,21 +528,21 @@ async fn shutdown(ip: String) -> bool {
         }
     };
     // Connect to the host
-    let mut session = match connect_key(&ip, &private_key) {
+    let mut session = match connect_key(&ip, &private_key).await {
         Ok(s) => s,
         Err(e) => {
             log::error!("Failed to open ssh connection with station: {e}");
             return false;
         }
     };
-    match session_exec(&mut session, &String::from("sudo /bin/systemctl poweroff")) {
+    match session_exec(&mut session, &String::from("sudo /bin/systemctl poweroff")).await {
         Ok(_) => {
             log::info!("Keysas station is shutting down.");
-            session.close();
+            session.close().await;
         }
         Err(why) => {
             log::error!("Rust error on open_exec: {why:?}");
-            session.close();
+            session.close().await;
             return false;
         }
     }
@@ -561,7 +563,7 @@ async fn export_sshpubkey(ip: String) -> bool {
     };
     log::info!("Exporting public SSH key to {ip:?}");
     // Connect to the host
-    let mut session = match connect_pwd(&ip) {
+    let mut session = match connect_pwd(&ip).await {
         Ok(s) => s,
         Err(e) => {
             log::error!("Failed to open ssh connection with station: {e}");
@@ -573,13 +575,15 @@ async fn export_sshpubkey(ip: String) -> bool {
         &mut session,
         public_key.trim(),
         &String::from("/home/keysas/.ssh/authorized_keys"),
-    ) {
+    )
+    .await
+    {
         Ok(_) => {
             log::info!("authorized_keys successfully s-copied !");
         }
         Err(e) => {
             log::error!("Rust error on upload: {e:?}");
-            session.close();
+            session.close().await;
             return false;
         }
     }
@@ -594,16 +598,18 @@ async fn export_sshpubkey(ip: String) -> bool {
                 echo 'PasswordAuthentication no' | sudo tee -a /etc/ssh/sshd_config > /dev/null; \
              fi && sudo systemctl restart sshd",
         ),
-    ) {
+    )
+    .await
+    {
         Ok(res) => {
             log::debug!("Command output: {}", String::from_utf8(res).unwrap());
             log::info!("Password authentication has been disabled.");
-            session.close();
+            session.close().await;
             true
         }
         Err(e) => {
             log::error!("Rust error on open_exec: {e:?}");
-            session.close();
+            session.close().await;
             false
         }
     }
@@ -635,24 +641,24 @@ async fn is_alive(name: String) -> Result<bool, String> {
     };
 
     // Connect to the host
-    let mut session = match connect_key(&ip, &private_key) {
+    let mut session = match connect_key(&ip, &private_key).await {
         Ok(s) => s,
         Err(e) => {
             log::error!("Failed to open ssh connection with station: {e}");
             return Err(String::from("Store error"));
         }
     };
-    match session_exec(&mut session, &String::from("/bin/systemctl status keysas")) {
+    match session_exec(&mut session, &String::from("/bin/systemctl status keysas")).await {
         Ok(_) => {
             log::info!("Keysas is alive.");
         }
         Err(why) => {
             log::error!("Cannot execute command status: {why:?}");
-            session.close();
+            session.close().await;
             return Err(String::from("Store error"));
         }
     }
-    session.close();
+    session.close().await;
     Ok(true)
 }
 
