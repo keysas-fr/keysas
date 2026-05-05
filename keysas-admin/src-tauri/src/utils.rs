@@ -1,3 +1,4 @@
+use crate::ssh_wrapper::KeysasSshSession;
 use crate::ssh_wrapper::session_exec;
 use crate::store::{drop_pki, init_store, set_pki_config};
 use anyhow::anyhow;
@@ -6,10 +7,8 @@ use keysas_lib::keysas_hybrid_keypair::HybridKeyPair;
 use pkcs8::LineEnding;
 use pkcs8::der::EncodePem;
 use shlex::try_quote;
-use ssh::LocalSession;
 use std::fs::File;
 use std::io::Write;
-use std::net::TcpStream;
 use std::path::Path;
 use x509_cert::Certificate;
 use x509_cert::der::DecodePem;
@@ -22,8 +21,8 @@ const PKI_ROOT_KEY_NAME: &str = "root";
 
 /// Wrapper function to triger a signing key generation on a station and
 /// recover CSRs from it
-pub fn cmd_generate_key_and_get_csr(
-    session: &mut LocalSession<TcpStream>,
+pub async fn cmd_generate_key_and_get_csr(
+    session: &mut KeysasSshSession,
     name: &str,
 ) -> Result<(CertReq, CertReq), anyhow::Error> {
     let name_escaped = try_quote(name)?;
@@ -32,7 +31,7 @@ pub fn cmd_generate_key_and_get_csr(
         "sudo /usr/bin/keysas-sign --generate", " --name ", name_escaped
     );
     log::error!("Command: {command:?}");
-    let cmd_res = match session_exec(session, &command) {
+    let cmd_res = match session_exec(session, &command).await {
         Ok(res) => res,
         Err(why) => {
             log::error!("Error on send_command: {why:?}");
@@ -83,8 +82,8 @@ pub fn cmd_generate_key_and_get_csr(
 ///     - file-pq: certificate for ML-DSA87 station files signing
 ///     - usb-cl: certificate for ED25519 USB signing
 ///     - usb-pq: certificate for ML-DSA87 USB signing
-pub fn send_cert_to_station(
-    session: &mut LocalSession<TcpStream>,
+pub async fn send_cert_to_station(
+    session: &mut KeysasSshSession,
     cert: &Certificate,
     kind: &str,
 ) -> Result<(), anyhow::Error> {
@@ -98,21 +97,21 @@ pub fn send_cert_to_station(
         "\"".to_owned() + &output + "\"",
     );
 
-    if let Err(e) = session_exec(session, &command) {
+    if let Err(e) = session_exec(session, &command).await {
         log::error!("Failed to load certificate on the station: {e}");
         return Err(anyhow!("Connection error"));
     }
 
     let command = "sudo /bin/chown keysas-out:keysas-out /etc/keysas/file-sign-cl.p8 /etc/keysas/file-sign-cl.pem /etc/keysas/file-sign-pq.p8 /etc/keysas/file-sign-pq.pem /etc/keysas/usb-ca-cl.pem /etc/keysas/usb-ca-pq.pem".to_string();
 
-    if let Err(e) = session_exec(session, &command) {
+    if let Err(e) = session_exec(session, &command).await {
         log::error!("Failed to chown files: {e}");
         return Err(anyhow!("Connection error"));
     }
 
     let command = "sudo /bin/systemctl restart keysas".to_string();
 
-    if let Err(e) = session_exec(session, &command) {
+    if let Err(e) = session_exec(session, &command).await {
         log::error!("Failed to restart Keysas: {e}");
         return Err(anyhow!("Connection error"));
     }
