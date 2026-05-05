@@ -81,20 +81,20 @@ pub fn get_ssh() -> Result<(String, String), anyhow::Error> {
 
                 connection.iterate(GET_PUBLIC_QUERY, |pairs| {
                     for &(key, value) in pairs.iter() {
-                        if key == "path" {
-                            if let Some(p) = value {
-                                public.push_str(p)
-                            }
+                        if key == "path"
+                            && let Some(p) = value
+                        {
+                            public.push_str(p)
                         }
                     }
                     true
                 })?;
                 connection.iterate(GET_PRIVATE_QUERY, |pairs| {
                     for &(key, value) in pairs.iter() {
-                        if key == "path" {
-                            if let Some(p) = value {
-                                private.push_str(p)
-                            }
+                        if key == "path"
+                            && let Some(p) = value
+                        {
+                            private.push_str(p)
                         }
                     }
                     true
@@ -288,11 +288,11 @@ pub fn get_pki_dir() -> Result<String, anyhow::Error> {
                 let mut result = String::new();
                 connection.iterate(query, |pairs| {
                     for &(key, value) in pairs.iter() {
-                        println!("{key:?}:{value:?}");
-                        if key == "directory" {
-                            if let Some(dir) = value {
-                                result.push_str(dir)
-                            }
+                        log::debug!("{key:?}:{value:?}");
+                        if key == "directory"
+                            && let Some(dir) = value
+                        {
+                            result.push_str(dir)
                         }
                     }
                     true
@@ -321,8 +321,6 @@ pub fn get_pki_info() -> Result<CertificateFields, anyhow::Error> {
                 };
                 connection.iterate(query, |pairs| {
                     for &(param, value) in pairs.iter() {
-                        //println!("param/value: {param}::::{value:?}");
-                        //println!("pair: {:?}", pairs);
                         match param {
                             "org_name" => result.org_name = Some(value.unwrap().to_string()),
                             "org_unit" => result.org_unit = Some(value.unwrap().to_string()),

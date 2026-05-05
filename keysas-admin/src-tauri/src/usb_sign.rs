@@ -79,6 +79,7 @@ fn rm_last(value: &str) -> &str {
 
 /// Construct an hybrid signature from firmware information
 #[cfg(target_os = "linux")]
+#[allow(clippy::too_many_arguments)]
 fn sign_device(
     vendor: &str,
     model: &str,
@@ -129,7 +130,7 @@ pub fn watch_new_usb() -> Result<(String, String, String, String, String)> {
         };
 
         if result < 0 {
-            println!("Error: result is < 0.");
+            log::error!("poll() returned a negative value");
         }
 
         let event = match socket.iter().next() {
